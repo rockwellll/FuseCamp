@@ -1,0 +1,36 @@
+
+<% if @todo.status%>
+  <%= turbo_stream.remove dom_id(@todo) %>
+
+  <%= turbo_stream.append "completed-todos-#{@todo.todo_list.id}" do %>
+    <div class="w-full flex items-center justify-start my-1" id="completed-todo-<%= @todo.id %>">
+      <%= form_for [current_user, @todo_list.project, @todo_list, @todo], method: :put do  %>
+        <button class="w-6 h-6 rounded-md bg--green flex justify-center items-center focus:outline-none" aria-label="toggle update status">
+          <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+        </button>
+      <% end %>
+
+      <h1 class="mx-2 text--gray"><%= @todo.name %></h1>
+    </div>
+  <% end %>
+
+  <%= turbo_stream.replace "todos-#{@todo_list.id}-count" do %>
+    <h1 class="text--gray font-medium text-sm" id="todos-<%= @todo_list.id %>-count">
+      <%= @todo_list.completed_todos %>/<%= @todo_list.todos.count %>
+      completed
+    </h1>
+  <% end %>
+  <% else %>
+
+  <%= turbo_stream.remove "completed-todo-#{@todo.id}" %>
+  <%= turbo_stream.append "todos-#{@todo.todo_list.id}", @todo %>
+
+  <%= turbo_stream.replace "todos-#{@todo_list.id}-count" do %>
+    <h1 class="text--gray font-medium text-sm" id="todos-<%= @todo_list.id %>-count">
+      <%= @todo_list.completed_todos %>/<%= @todo_list.todos.count %>
+      completed
+    </h1>
+  <% end %>
+
+<% end %>
+

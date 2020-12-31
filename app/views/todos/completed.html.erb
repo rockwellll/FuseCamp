@@ -1,0 +1,9 @@
+<div class="w-full flex items-center justify-start my-1" id="completed-todo-<%= dom_id todo %>">
+  <%= form_for [current_user, @project, todo_list, todo], method: :put do |f| %>
+    <button class="w-5 h-5 rounded border border-gray-400 flex justify-center items-center focus:outline-none" aria-label="toggle update status">
+      <svg class="w-6 h-6 text--green" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+    </button>
+  <% end %>
+
+  <h1 class="mx-2 text--gray"><%= todo.name %></h1>
+</div>

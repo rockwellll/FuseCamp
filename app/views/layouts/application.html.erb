@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basecamp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'stylesheets', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="bg-body h-screen relative">
+    <header>
+      <nav class="w-full flex justify-between items-center px-2 py-2">
+        <h1 class="text-xl text--darker font-medium">Basecamp</h1>
+
+        <% if current_user %>
+          <main class="text--gray">
+            <ul class="flex">
+              <li class="mx-2 flex">
+                <%= link_to user_path(id: current_user.id), class: "flex items-center" do %>
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg>
+                  Home
+                <% end %>
+              </li>
+              <li class="mx-2">
+                Hey
+              </li>
+              <li class="mx-2 flex">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Activity
+              </li>
+              <li class="mx-2 flex">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z" clip-rule="evenodd"></path></svg>
+                My Stuff
+              </li>
+              <li class="mx-2 flex">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                Find
+              </li>
+            </ul>
+          </main>
+
+          <span>USER</span>
+        <% end %>
+      </nav>
+
+    </header>
+
+
+    <div class="w-full flex flex-col justify-center items-center">
+      <%= yield %>
+    </div>
+
+  <%= debug params %>
+  </body>
+</html>

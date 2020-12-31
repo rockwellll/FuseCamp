@@ -1,0 +1,27 @@
+<div class="flex flex-col w-full justify-center items-center mt-10">
+  <h2>Sign up for basecamp personal</h2>
+
+  <div class="w-6/12 flex justify-center">
+    <div class="bg-white rounded-md border border-gray-200 w-6/12">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "p-4"}) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <h3 class="text-xl">Type your name and email address to begin</h3>
+        <div class="field">
+          <%= f.email_field :email, autocomplete: "email", class: "w-full rounded bg-white focus:outline-none focus:shadow-outline border border-gray-400 p-1 my-2", placeholder: "Your email" %>
+        </div>
+
+        <div class="field">
+          <%= f.password_field :password, autocomplete: "new-password", class: "w-full rounded bg-white focus:outline-none focus:shadow-outline border border-gray-400 p-1 my-2", placeholder: "password" %>
+        </div>
+
+        <!--        <div class="field">-->
+        <%#= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full rounded bg-white focus:outline-none focus:shadow-outline border border-gray-400 p-1", placeholder: "confirm password" %>
+        <!--        </div>-->
+
+        <div class="actions">
+          <button type="submit" class="w-full text-white rounded-lg p-1 bg--green">Sign up</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

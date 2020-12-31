@@ -1,0 +1,162 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import 'trix/dist/trix.css';
+
+
+.bg-body {
+    background-color: #F6F2EF;
+}
+
+.bg--green {
+    background-color: #2DA562;
+}
+
+.text--green {
+    color: #2DA562;
+}
+
+.button__green {
+    @apply bg--green text-white;
+}
+
+.button__green:focus {
+    background-color: #227D4A;
+}
+
+.text--gray {
+    color: #3E4F58;
+}
+
+.text--darker {
+    color: #283C46;
+}
+
+.bg--blue {
+    background-color: #1B6AC9;
+}
+
+.side-nav {
+    opacity: 0;
+    right: -100px;
+    tab-index: 0;
+}
+
+.side-nav--animate--in {
+    animation: slide-in 400ms ease-in 0s 1 normal forwards;
+}
+
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        right: -100px;
+        tab-index: 0;
+    }
+    to {
+        opacity: 1;
+        right: 0;
+        tab-index: 1;
+    }
+}
+
+@keyframes slide-out {
+    from {
+        opacity: 1;
+        right: 0;
+        tab-index: 1;
+    }
+    to {
+        opacity: 0;
+        right: -100px;
+        tab-index: 0;
+    }
+}
+
+.bg--blue--light {
+    background-color: #28B1CC;
+}
+
+.border--green {
+    border-color: #2DA562;
+}
+
+trix-toolbar {
+    @apply w-full text-sm;
+}
+
+trix-editor {
+    @apply w-full rounded-md border;
+    height: 200px;
+
+}
+
+.link {
+    color: #1B6AC9;
+}
+
+.text--placeholder {
+    color: #BDBDBD;
+}
+
+.text__light {
+    color: #877457;
+}
+
+.todo__container > span {
+    display: none;
+}
+
+.todo__container:hover > span {
+    display: inline;
+}
+
+.todo__aside__menu:after {
+    @apply border absolute top-0 transform rotate-45;
+    width: 50px;
+    height: 50px;
+    right: -10px;
+    content: '';
+}
+
+.todo__aside__menu__button:hover {
+    background-color: #ECF9FD;
+}
+
+
+.bg--black--light {
+    background: #404040;
+}
+.notification__pop__in {
+    visibility: hidden;
+    transform: scale(0.1);
+    animation: pop-in 1s ease-in-out 0s 1 normal both;
+}
+
+.notification__pop__out {
+    animation: pop-out 600ms ease-in 0s 1 normal forwards;
+}
+
+@keyframes pop-in {
+    from {
+        visibility: hidden;
+    }
+
+    to {
+        display: block;
+        visibility: visible;
+        transform: scale(1);
+    }
+}
+
+@keyframes pop-out {
+    from {
+        visibility: visible;
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(0);
+    }
+}

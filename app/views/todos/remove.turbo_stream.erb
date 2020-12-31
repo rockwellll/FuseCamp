@@ -1,0 +1,18 @@
+<%= turbo_stream.replace "notification" do %>
+  <div data-controller="notification" data-notification-target="container" class="bg--black--light p-1 flex rounded-md text-white text-xs px-2 notification__pop__in">
+    <svg class="w-6 h-6 text--green" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+    The to-do is in the trash
+    <a href="" class="mx-2">View Trash</a>
+
+    <button type="button" data-action="click->notification#hide">hide</button>
+  </div>
+<% end %>
+
+<%= turbo_stream.remove dom_id @todo %>
+
+<%= turbo_stream.replace "todos-#{@todo_list.id}-count" do %>
+  <h1 class="text--gray font-medium text-sm" id="todos-<%= @todo_list.id %>-count">
+    <%= @todo_list.display_todos_status %>
+    completed
+  </h1>
+<% end %>

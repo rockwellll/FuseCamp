@@ -1,0 +1,110 @@
+<article class="my-3 w-full" data-controller="todos">
+  <header class="flex items-end">
+    <svg class="w-5 h-5 text--gray" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M3 7a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 13a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+    </svg>
+    <div class="flex flex-col items-center justify-center">
+      <h1 class="text--gray font-medium text-sm" id="todos-<%= todo_list.id %>-count">
+        <%= todo_list.display_todos_status %>
+        completed
+      </h1>
+      <%= link_to todo_list.name, [current_user, @project, todo_list], class: "link underline font-medium mx-2 text-lg" %>
+    </div>
+  </header>
+
+    <main class="w-full p-2 px-5" id="todos-<%= todo_list.id %>">
+      <% if todo_list.todos.count != 0 %>
+          <% todo_list.todos.not_completed.each do |todo| %>
+            <%= render todo, todo_list: todo_list %>
+          <% end %>
+      <% end %>
+    </main>
+
+
+  <section class="w-full hidden" data-todos-target="form">
+    <%= form_for [current_user, todo_list.project, todo_list, todo_list.todos.new], html: {class: "flex flex-col items-center py-2 px-3 w-full p-2 py-2 px-3 rounded-md border border-gray-300 mt-2"} do |f| %>
+      <div class="flex w-full flex-col mb-3">
+        <div class="w-full flex">
+          <div class="w-5 h-5 rounded border border-gray-400">
+          </div>
+          <%= f.text_field :name, class: "w-full border-b mx-3 border-transparent  focus:outline-none focus:border-gray-300", placeholder: "Describe this to-do" %>
+        </div>
+
+        <%# if todo.errors[:name] %>
+<!--          <small class="text-red-600"><%#= todo.errors[:name][0] %></small>-->
+        <%# end %>
+      </div>
+      <hr class="w-11/12 bg-gray-400"/>
+
+      <div class="flex w-full my-3">
+        <div class="w-2/12">
+          <label for="">Assigned to: </label>
+        </div>
+
+        <input type="text" class="w-8/12 border-b mx-3 border-transparent  focus:outline-none">
+      </div>
+
+      <hr class="w-11/12 bg-gray-400"/>
+      <div class="flex w-full my-3">
+        <div class="w-2/12">
+          <label for="">Due on </label>
+        </div>
+
+        <input type="text" class="w-8/12 border-b mx-3 border-transparent  focus:outline-none" value="DO IT LIKE BASECAMP FFS">
+      </div>
+
+      <hr class="w-11/12 bg-gray-400"/>
+
+      <div class="flex w-full my-3">
+        <section class="w-full" data-todos-target="information">
+          <div class="w-2/12">
+            <label for="">Notes </label>
+          </div>
+
+          <button type="button" data-action="click->todos#showDescriptionContainer" class="w-full focus:outline-none text-left cursor-pointer text--placeholder">
+            Add extra details or attach file
+          </button>
+        </section>
+
+        <section class="hidden" data-todos-target="description">
+          <%= f.rich_text_area :notes, class: "w-full my-2" %>
+        </section>
+      </div>
+
+      <footer class="mt-3 w-full">
+        <button class="button__green rounded-full text-sm px-3 py-1 text-white focus:outline-none">
+          Add this to-do
+        </button>
+
+        <button type="button" data-action="todos#hideForm" class="border--green rounded-full text-sm px-3 py-1 text--green focus:outline-none">
+            Cancel
+        </button>
+      </footer>
+    <% end %>
+
+
+    <%#= turbo_frame_tag "new_todo", src: new_user_project_todo_list_todo_path(current_user, @project, todo_list)%>
+  </section>
+
+  <footer>
+    <button data-action="click->todos#showForm" class="px-2 text-sm py-1 border border-gray-300 rounded-full focus:outline-none focus:shadow-outline my-2">
+      Add a to-do
+    </button>
+
+    <section class="w-full px-5" id="completed-todos-<%= todo_list.id %>">
+      <% todo_list.todos.completed.each do |todo| %>
+        <div class="w-full flex items-center justify-start my-1" id="completed-todo-<%= todo.id %>">
+          <%= form_for [current_user, @project, todo_list, todo], method: :put do |f| %>
+            <button class="w-6 h-6 rounded-md bg--green flex justify-center items-center focus:outline-none" aria-label="toggle update status">
+              <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+            </button>
+          <% end %>
+
+          <h1 class="mx-2 text--gray"><%= todo.name %></h1>
+        </div>
+      <% end %>
+    </section>
+  </footer>
+
+
+</article>

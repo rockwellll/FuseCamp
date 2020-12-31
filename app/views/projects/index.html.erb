@@ -1,0 +1,59 @@
+<%#= turbo_frame_tag "rooms", class: "w-full flex flex-col justify-center items-center" do  %>
+  <h1 class="mt-5 text-3xl text-center">Your Projects</h1>
+
+  <div class="w-full flex flex-col items-center">
+    <main class="w-full md:w-4/12 flex flex-col justify-center my-2">
+      <% current_user.projects.each do |project|  %>
+        <%= link_to [current_user, project], class: "w-full" do    %>
+          <div class="w-full bg-white rounded-md flex flex-col justify-between my-2 h-40 p-2 relative">
+            <!--          <div class="absolute flex flex-col bg--blue p-2 text-white w-7/12 side-nav">-->
+            <!--            <header class="flex justify-end border-b">-->
+            <!--              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>-->
+            <!--            </header>-->
+
+
+            <!--            <ul class="text-sm">-->
+            <!--              <li>-->
+            <!--                <button class="my-2">-->
+            <!--                  Edit-->
+            <!--                </button>-->
+            <!--              </li>-->
+            <!--              <li class="mb-2">-->
+            <!--                <button>-->
+            <!--                  Delete-->
+            <!--                </button>-->
+            <!--              </li>-->
+            <!--            </ul>-->
+            <!--          </div>-->
+
+            <header class="flex w-full justify-between items-start">
+              <div class="w-full">
+                <h2 class="font-bold text--darker text-xl">
+                  <%= project.name %>
+                </h2>
+
+              </div>
+            </header>
+
+
+            <footer>
+              <div class="rounded-full h-10 w-10">
+                <%= current_user.email %>
+              </div>
+
+            </footer>
+          </div>
+        <% end %>
+      <% end %>
+
+
+      <%= link_to new_project_path, class: "w-full" do %>
+        <div class=" bg-white rounded-md flex flex-col justify-center items-center h-40">
+          <h2 class="text-2xl">Create new project</h2>
+
+          <svg class="w-10 h-10 text--green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+        </div>
+      <% end %>
+    </main>
+  </div>
+<%# end %>
