@@ -1,15 +1,13 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:edit, :show]
-  before_action :owner?, only: [:edit, :show, :edit]
+  before_action :set_project, only: %i[edit show update destroy]
+  before_action :owner?, only: %i[edit show edit]
 
 
   def new
     @project = Project.new
   end
 
-  def index
-
-  end
+  def index; end
 
   def create
     @project = current_user.projects.new project_params
@@ -25,15 +23,30 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def edit
+  def edit; end
 
+  def show; end
+
+  def update
+    respond_to do |format|
+      if @project.update(project_params)
+        format.html do
+          redirect_to user_projects_path(user_id: current_user), notice: "Project successfuly updated"
+        end
+      end
+    end
   end
 
-  def show
+  def destroy
+    @project.destroy
 
+    respond_to do |format|
+      format.html {redirect_to user_projects_path user: current_user}
+    end
   end
 
   private
+
   def project_params
     params.require(:project).permit(:name, :description)
   end
@@ -43,6 +56,6 @@ class ProjectsController < ApplicationController
   end
 
   def owner?
-     current_user.id == Project.find(params[:id]).user_id
+    current_user.id == Project.find(params[:id]).user_id
   end
 end

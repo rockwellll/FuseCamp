@@ -47,7 +47,7 @@ class TodosController < ApplicationController
   def destroy
     project = Project.find params[:project_id]
     project.put_in_trash @todo
-    @todo.update! deleted_at: Date.new
+    @todo.update! deleted_at: Time.now.strftime("%d/%m/%Y %H:%M")
 
     respond_to do |format|
       format.turbo_stream do

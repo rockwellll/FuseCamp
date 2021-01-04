@@ -3,7 +3,6 @@ class Todo < ApplicationRecord
 
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
   belongs_to :todo_list
-  has_one :project, through: :todo_list
   has_rich_text :notes
 
   # after_create_commit { broadcast_append_to "todos-#{todo_list.id}"}

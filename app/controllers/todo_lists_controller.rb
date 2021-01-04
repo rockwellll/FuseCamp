@@ -1,7 +1,7 @@
 class TodoListsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: [:index, :create]
-  before_action :set_todo_list, only: %i[ show]
+  before_action :set_project, only: %i[index create destroy]
+  before_action :set_todo_list, only: %i[show destroy]
 
   def index
     @todolist = TodoList.new
@@ -23,6 +23,18 @@ class TodoListsController < ApplicationController
     end
   end
 
+  def destroy
+    @id = @todo_list.id
+    @todo_list.destroy
+    respond_to do |format|
+      format.turbo_stream do
+        render 'todo_lists/remove'
+      end
+      format.html {
+        redirect_to user_project_todo_lists_path(user_id: current_user.id, project_id: @project.id)
+      }
+    end
+  end
   private
 
   def todo_params

@@ -1,4 +1,4 @@
-<article class="my-3 w-full" data-controller="todos">
+<article class="my-3 w-full" data-controller="todos" id="<%= dom_id todo_list %>">
   <header class="flex items-end">
     <svg class="w-5 h-5 text--gray" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" d="M3 7a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 13a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
@@ -9,6 +9,10 @@
         completed
       </h1>
       <%= link_to todo_list.name, [current_user, @project, todo_list], class: "link underline font-medium mx-2 text-lg" %>
+      <%= form_tag [current_user, @project, todo_list] do %>
+        <%= hidden_field_tag :_method, 'delete' %>
+        <button>submit</button>
+      <% end %>
     </div>
   </header>
 
