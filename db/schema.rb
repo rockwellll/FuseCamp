@@ -12,27 +12,27 @@
 
 ActiveRecord::Schema.define(version: 2020_12_30_093832) do
 
-  create_table "action_text_rich_texts", force: :cascade do |t|
+  create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
-    t.text "body"
+    t.text "body", size: :long
     t.string "record_type", null: false
-    t.integer "record_id", null: false
+    t.bigint "record_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
-  create_table "active_storage_attachments", force: :cascade do |t|
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -43,9 +43,9 @@ ActiveRecord::Schema.define(version: 2020_12_30_093832) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "project_users", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "project_id", null: false
+  create_table "project_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "project_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id", "user_id"], name: "index_project_users_on_project_id_and_user_id"
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 2020_12_30_093832) do
     t.index ["user_id"], name: "index_project_users_on_user_id"
   end
 
-  create_table "projects", force: :cascade do |t|
-    t.integer "user_id", null: false
+  create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.string "name"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
@@ -62,14 +62,14 @@ ActiveRecord::Schema.define(version: 2020_12_30_093832) do
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
-  create_table "t1s", force: :cascade do |t|
+  create_table "t1s", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "todo_lists", force: :cascade do |t|
-    t.integer "creator_id", null: false
-    t.integer "project_id", null: false
+  create_table "todo_lists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "creator_id", null: false
+    t.bigint "project_id", null: false
     t.string "name"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
@@ -78,9 +78,9 @@ ActiveRecord::Schema.define(version: 2020_12_30_093832) do
     t.index ["project_id"], name: "index_todo_lists_on_project_id"
   end
 
-  create_table "todos", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "todo_list_id", null: false
+  create_table "todos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "todo_list_id", null: false
     t.string "name", null: false
     t.boolean "status", default: false
     t.datetime "deadline"
@@ -92,24 +92,24 @@ ActiveRecord::Schema.define(version: 2020_12_30_093832) do
     t.index ["user_id"], name: "index_todos_on_user_id"
   end
 
-  create_table "trash_items", force: :cascade do |t|
-    t.integer "trash_id", null: false
+  create_table "trash_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "trash_id", null: false
     t.string "trashable_type"
-    t.integer "trashable_id"
+    t.bigint "trashable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["trash_id"], name: "index_trash_items_on_trash_id"
     t.index ["trashable_type", "trashable_id"], name: "index_trash_items_on_trashable_type_and_trashable_id"
   end
 
-  create_table "trashes", force: :cascade do |t|
-    t.integer "project_id", null: false
+  create_table "trashes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "project_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "index_trashes_on_project_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
