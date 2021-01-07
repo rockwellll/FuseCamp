@@ -7,6 +7,12 @@ export default class extends Controller {
         this.formTarget.classList.toggle("hidden");
     }
 
+    disconnect() {
+        console.log('disconnected');
+        this.hideForm();
+        super.connect();
+    }
+
     showDescriptionContainer() {
         this.descriptionTarget.classList.remove("hidden");
         this.informationTarget.classList.add("hidden");

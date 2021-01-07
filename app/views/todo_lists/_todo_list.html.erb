@@ -9,10 +9,10 @@
         completed
       </h1>
       <%= link_to todo_list.name, [current_user, @project, todo_list], class: "link underline font-medium mx-2 text-lg" %>
-      <%= form_tag [current_user, @project, todo_list] do %>
-        <%= hidden_field_tag :_method, 'delete' %>
-        <button>submit</button>
-      <% end %>
+      <%#= form_tag [current_user, @project, todo_list] do %>
+        <%#= hidden_field_tag :_method, 'delete' %>
+<!--        <button>submit</button>-->
+      <%# end %>
     </div>
   </header>
 
@@ -25,8 +25,8 @@
     </main>
 
 
-  <section class="w-full hidden" data-todos-target="form">
-    <%= form_for [current_user, todo_list.project, todo_list, todo_list.todos.new], html: {class: "flex flex-col items-center py-2 px-3 w-full p-2 py-2 px-3 rounded-md border border-gray-300 mt-2"} do |f| %>
+  <section class="w-full" >
+    <%= form_for [current_user, todo_list.project, todo_list, todo_list.todos.new], html: {class: "flex flex-col items-center py-2 px-3 w-full p-2 py-2 px-3 rounded-md border border-gray-300 mt-2 hidden"}, data: { "todos-target": "form"} do |f| %>
       <div class="flex w-full flex-col mb-3">
         <div class="w-full flex">
           <div class="w-5 h-5 rounded border border-gray-400">

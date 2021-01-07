@@ -8,9 +8,4 @@ module Trashable
 
     scope :trashed, -> { unscope(where: :deleted_at)}
   end
-
-  def trash(project)
-    project.trash.items.create! trashable: self
-    # self.update! deleted_at: true
-  end
 end
