@@ -1,5 +1,5 @@
 <%= form_for [current_user, todo_list.project, todo_list, todo],
-             data: { controller: "reset_form", action: 'turbo:load->reset_form#reset' },
+             data: {controller: "new-todo-form"},
              html: {class: "flex flex-col items-center py-2 px-3 w-full p-2 py-2 px-3 rounded-md border border-gray-300 mt-2", id: dom_id(todo)} do |f| %>
   <div class="flex w-full flex-col mb-3">
     <div class="w-full flex">
@@ -19,16 +19,63 @@
       <label for="">Assigned to: </label>
     </div>
 
-    <input type="text" class="w-8/12 border-b mx-3 border-transparent  focus:outline-none">
   </div>
 
   <hr class="w-11/12 bg-gray-400"/>
-  <div class="flex w-full my-3">
-    <div class="w-2/12">
+  <div class="flex w-full items-start my-3 text-sm">
+    <div class="w-1/12 mr-3">
       <label for="">Due on </label>
     </div>
 
-    <input type="text" class="w-8/12 border-b mx-3 border-transparent  focus:outline-none" value="DO IT LIKE BASECAMP FFS">
+    <div class="w-8/12 flex flex-col">
+
+      <div class="flex items-center mb-2">
+        <div
+          data-new-todo-form-target="unspecifiedSelected"
+          class="w-4 h-4 rounded-full border mr-2 custom-radio__button">
+
+        </div>
+        <label data-action="click->new-todo-form#showUnspecified">
+          No Due Date
+        </label>
+      </div>
+
+      <div class="flex items-center my-2">
+        <div
+          data-new-todo-form-target="specificSelected"
+          class="w-4 h-4 rounded-full border mr-2 custom-radio__button">
+        </div>
+
+        <label
+          data-action="click->new-todo-form#showSpecific"
+          for="specific_date">
+          Specific Date
+        </label>
+
+        <%= f.date_field :deadline, class: "border-b p-1 focus:outline-none border-gray-700 hidden", data: {"new-todo-form-target": "specific"} %>
+      </div>
+
+      <div class="flex items-center my-2">
+        <div class="w-6/12 flex">
+          <div
+            data-new-todo-form-target="rangeSelected"
+            class="w-4 h-4 rounded-full border mr-2 custom-radio__button">
+          </div>
+          <label data-action="click->new-todo-form#showRange" for="date_range">
+            Range
+          </label>
+
+          <div data-new-todo-form-target="range" class="flex w-4/12 hidden justify-start items-center px-2">
+            <%= f.date_field :starts_at, class: "border-b p-1 focus:outline-none border-gray-700 hidden" %>
+            <span>And</span>
+
+            <%= f.date_field :deadline, class: "border-b p-1 focus:outline-none border-gray-700 hidden" %>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
   </div>
 
   <hr class="w-11/12 bg-gray-400"/>
