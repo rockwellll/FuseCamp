@@ -5,6 +5,8 @@ class CreateTodos < ActiveRecord::Migration[6.0]
       t.belongs_to :todo_list, null: false, foreign_key: true,  on_delete: :cascade
       t.string :name, null: false
       t.boolean :status, default: false
+
+      t.datetime :starts_at, null: true
       t.datetime :deadline, null: true
       t.text :notes, null: true
 

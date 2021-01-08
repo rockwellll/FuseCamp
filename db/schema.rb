@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2020_12_30_093832) do
     t.bigint "todo_list_id", null: false
     t.string "name", null: false
     t.boolean "status", default: false
+    t.datetime "starts_at"
     t.datetime "deadline"
     t.text "notes"
     t.datetime "deleted_at"
