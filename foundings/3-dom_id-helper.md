@@ -1,5 +1,5 @@
 # The `dom_id` helper function
-the `dom_id` helper function is one of the most underrated and mostly overseen in *Rails*.
+The `dom_id` helper function is one of the most underrated and mostly overlooked in *Rails*.
 
 What's the problem that `dom_id` tries to solve?
 well in any front-end code that needs  **HTML** `id` attribute, we need to find a way to make every `id`  unique inside our front-end code, which is gets really messy and it's not scalable, understandable, and extendable.
