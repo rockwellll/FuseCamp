@@ -4,8 +4,8 @@ class Project < ApplicationRecord
   has_one :trash, dependent: :destroy
 
   has_many :members, class_name: 'ProjectUser', dependent: :delete_all
-  has_many :todo_lists, dependent: :destroy
-  has_many :todos, through: :todo_lists
+  has_many :todo_sets, dependent: :destroy
+  has_many :todos, through: :todo_sets
 
   validates :name, presence: true
   after_create_commit :link_trash

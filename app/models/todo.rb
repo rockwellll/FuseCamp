@@ -2,10 +2,10 @@ class Todo < ApplicationRecord
   include Trashable
 
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
-  belongs_to :todo_list
+  belongs_to :todo_set
   has_rich_text :notes
 
-  # after_create_commit { broadcast_append_to "todos-#{todo_list.id}"}
+  # after_create_commit { broadcast_append_to "todos-#{todo_set.id}"}
 
   validates :name, presence: true
 
