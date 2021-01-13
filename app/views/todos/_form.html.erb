@@ -66,10 +66,10 @@
           </label>
 
           <div data-new-todo-form-target="range" class="flex w-4/12 hidden justify-start items-center px-2">
-            <%= f.date_field :starts_at, class: "border-b p-1 focus:outline-none border-gray-700 hidden" %>
+            <%= f.date_field :starts_at, class: "border-b p-1 focus:outline-none border-gray-700" %>
             <span>And</span>
 
-            <%= f.date_field :deadline, class: "border-b p-1 focus:outline-none border-gray-700 hidden" %>
+            <%= f.date_field :ends_at, class: "border-b p-1 focus:outline-none border-gray-700" %>
           </div>
 
         </div>
@@ -101,6 +101,6 @@
       Add this to-do
     </button>
 
-    <%= link_to "Cancel", user_project_todo_lists_path(user_id: current_user, project_id: todo_list.project) %>
+    <%= link_to "Cancel", user_project_todoSets_path(user_id: current_user, project_id: todo_list.project) %>
   </footer>
 <% end %>

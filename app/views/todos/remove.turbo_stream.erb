@@ -10,9 +10,9 @@
 
 <%= turbo_stream.remove dom_id @todo %>
 
-<%= turbo_stream.replace "todos-#{@todo_list.id}-count" do %>
-  <h1 class="text--gray font-medium text-sm" id="todos-<%= @todo_list.id %>-count">
-    <%= @todo_list.display_todos_status %>
+<%= turbo_stream.replace "todos-#{@todo_set.id}-count" do %>
+  <h1 class="text--gray font-medium text-sm" id="todos-<%= @todo_set.id %>-count">
+    <%= @todo_set.display_todos_status %>
     completed
   </h1>
 <% end %>
