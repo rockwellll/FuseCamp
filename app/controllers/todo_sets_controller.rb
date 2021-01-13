@@ -4,17 +4,17 @@ class TodoSetsController < ApplicationController
   before_action :set_todo_list, only: %i[show destroy]
 
   def index
-    @todolist = TodoSet.new
+    @todoset = TodoSet.new
   end
 
   def create
-    @todo_set = @project.todo_lists.new(todo_params) do |todo_list|
+    @todo_set = @project.todo_sets.new(todo_params) do |todo_list|
       todo_list.creator = current_user
     end
 
     respond_to do |format|
       if @todo_set.save
-        format.html { redirect_to user_project_todoSet_path(user_id: current_user, project_id: @project, id: @todo_set), notice: "Todo was successfully created" }
+        format.html { redirect_to user_project_todo_set_path(user_id: current_user, project_id: @project, id: @todo_set), notice: "Todo was successfully created" }
         format.json { render json: @todo_set.to_json }
       else
         format.html { redirect_to user_project_path(user_id: current_user.id, id: @project.id) } ## Specify the format in which you are rendering "new" page
