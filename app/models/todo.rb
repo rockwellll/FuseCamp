@@ -1,5 +1,5 @@
 class Todo < ApplicationRecord
-  include Trashable
+  include Commentable, Trashable
 
   belongs_to :creator, foreign_key: 'user_id', class_name: 'User'
   belongs_to :todo_set
@@ -9,7 +9,7 @@ class Todo < ApplicationRecord
 
   validates :name, presence: true
 
-  scope :not_completed, -> { where status: false}
+  scope :not_completed, -> { where.not status: true}
   scope :completed, -> { where status: true}
 
   def status_completed?
