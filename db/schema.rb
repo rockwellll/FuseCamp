@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_30_093832) do
+ActiveRecord::Schema.define(version: 2021_01_13_183553) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -67,29 +67,30 @@ ActiveRecord::Schema.define(version: 2020_12_30_093832) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "todo_lists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "todo_sets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "creator_id", null: false
     t.bigint "project_id", null: false
     t.string "name"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["creator_id"], name: "index_todo_lists_on_creator_id"
-    t.index ["project_id"], name: "index_todo_lists_on_project_id"
+    t.index ["creator_id"], name: "index_todo_sets_on_creator_id"
+    t.index ["project_id"], name: "index_todo_sets_on_project_id"
   end
 
   create_table "todos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "todo_list_id", null: false
+    t.bigint "todo_set_id", null: false
     t.string "name", null: false
     t.boolean "status", default: false
     t.datetime "starts_at"
+    t.datetime "ends_at"
     t.datetime "deadline"
     t.text "notes"
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["todo_list_id"], name: "index_todos_on_todo_list_id"
+    t.index ["todo_set_id"], name: "index_todos_on_todo_set_id"
     t.index ["user_id"], name: "index_todos_on_user_id"
   end
 
@@ -126,9 +127,9 @@ ActiveRecord::Schema.define(version: 2020_12_30_093832) do
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"
   add_foreign_key "projects", "users"
-  add_foreign_key "todo_lists", "projects"
-  add_foreign_key "todo_lists", "users", column: "creator_id"
-  add_foreign_key "todos", "todo_lists"
+  add_foreign_key "todo_sets", "projects"
+  add_foreign_key "todo_sets", "users", column: "creator_id"
+  add_foreign_key "todos", "todo_sets"
   add_foreign_key "todos", "users"
   add_foreign_key "trash_items", "trashes"
   add_foreign_key "trashes", "projects"

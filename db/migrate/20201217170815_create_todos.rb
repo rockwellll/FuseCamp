@@ -7,6 +7,7 @@ class CreateTodos < ActiveRecord::Migration[6.0]
       t.boolean :status, default: false
 
       t.datetime :starts_at, null: true
+      t.datetime :ends_at , null: true
       t.datetime :deadline, null: true
       t.text :notes, null: true
 

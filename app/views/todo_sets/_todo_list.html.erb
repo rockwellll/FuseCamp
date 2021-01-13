@@ -9,7 +9,7 @@
         completed
       </h1>
       <%= link_to todo_list.name, [current_user, @project, todo_list], class: "link underline font-medium mx-2 text-lg" %>
-      <%#= form_tag [current_user, @project, todo_list] do %>
+      <%#= form_tag [current_user, @project, todo_set] do %>
         <%#= hidden_field_tag :_method, 'delete' %>
 <!--        <button>submit</button>-->
       <%# end %>
@@ -19,7 +19,7 @@
     <main class="w-full p-2 px-5" id="todos-<%= todo_list.id %>">
       <% if todo_list.todos.count != 0 %>
           <% todo_list.todos.not_completed.each do |todo| %>
-            <%= render todo, todo_list: todo_list %>
+            <%= render todo, todo_set: todo_list %>
           <% end %>
       <% end %>
     </main>
@@ -87,7 +87,7 @@
     <% end %>
 
 
-    <%#= turbo_frame_tag "new_todo", src: new_user_project_todo_list_todo_path(current_user, @project, todo_list)%>
+    <%#= turbo_frame_tag "new_todo", src: new_user_project_todo_list_todo_path(current_user, @project, todo_set)%>
   </section>
 
   <footer>
@@ -99,6 +99,7 @@
       <% todo_list.todos.completed.each do |todo| %>
         <div class="w-full flex items-center justify-start my-1" id="completed-todo-<%= todo.id %>">
           <%= form_for [current_user, @project, todo_list, todo], method: :put do |f| %>
+            <%= f.text_field :status, value: !todo.status ,class: 'hidden' %>
             <button class="w-6 h-6 rounded-md bg--green flex justify-center items-center focus:outline-none" aria-label="toggle update status">
               <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
             </button>

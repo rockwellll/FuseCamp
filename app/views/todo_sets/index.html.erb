@@ -36,10 +36,25 @@
       To-dos
     </h1>
 
-    <div>
-      <button class="rounded-full border px-3 py-2 text-xs">
+    <div class="flex relative" data-controller="todo-list-display">
+      <button
+        data-action="click->todo-list-display#toggleContainerVisibility"
+        class="rounded-full border px-3 py-2 text-xs todo-list__display-settings flex items-center focus:shadow-outline focus:outline-none">
         View as
       </button>
+
+      <div
+        data-todo-list-display-target="settingsContainer"
+        class="absolute bg-white rounded-md shadow py-2 text--gray hidden" style="width: 250px; top: 40px">
+
+        <button class="mt-2 p-1 w-full hover:bg-blue-100 text-center font-medium focus:outline-none">
+          View to-dos in a list
+        </button>
+
+        <button class="mt-2 p-1 w-full hover:bg-blue-100 text-center focus:outline-none">
+          View to-dos as cards
+        </button>
+      </div>
     </div>
   </header>
 
@@ -73,7 +88,7 @@
     <%= notice %>
 
     <% @project.todo_lists.each do |todo_list| %>
-      <%= render "todo_lists/todo_list", todo_list: todo_list %>
+      <%= render "todo_sets/todo_list", todo_set: todo_list %>
     <% end %>
   </main>
 </section>
