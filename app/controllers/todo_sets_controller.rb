@@ -1,6 +1,6 @@
 class TodoSetsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: %i[index create destroy]
+  before_action :set_project, only: %i[index create destroy show]
   before_action :set_todo_list, only: %i[show destroy]
 
   def index
