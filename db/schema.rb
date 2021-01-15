@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2021_01_13_190419) do
     t.bigint "user_id", null: false
     t.string "commentable_type"
     t.bigint "commentable_id"
+    t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
