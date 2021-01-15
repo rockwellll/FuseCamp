@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   resources :users, path: '' do
     resources :projects do
       resources :todo_sets, path: 'todosets' do
-        resources :todos
+        resources :todos do
+          resources :comments, module: :todos
+        end
+        resources :comments, module: :todo_sets
       end
     end
 
