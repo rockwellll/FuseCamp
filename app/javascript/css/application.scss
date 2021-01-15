@@ -9,6 +9,10 @@
     background-color: #F6F2EF;
 }
 
+.bg-body__light {
+    background-color: #FAF8F7;
+}
+
 .bg--green {
     background-color: #2DA562;
 }
@@ -163,4 +167,24 @@ trix-editor {
 
 .custom-radio__button {
     border-color: #283C46;
+}
+
+.border--body {
+    border-color: #DADADA;
+}
+
+.prompt {
+    color: #a9a9a9;
+}
+
+.trix-hidden__block-tools  .trix-button-group--block-tools {
+    @apply hidden;
+}
+
+.trix-hidden__block-tools trix-editor {
+    border: none;
+}
+
+.text--body__lighter {
+    color: #BCBBBA;
 }
