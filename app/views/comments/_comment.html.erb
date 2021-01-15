@@ -1,0 +1,17 @@
+<article id="<%= dom_id comment %>" class="rounded-lg bg-body__light flex flex-row-reverse items-center justify-between px-4 py-2 my-2">
+  <aside class="self-start text--gray flex items-center text--body__lighter">
+    <small class="text-sm mx-2">
+      <%= comment.created_at.hour %>:<%= comment.created_at.min %>
+    </small>
+
+    <button class="focus:outline-none">
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path></svg>
+    </button>
+  </aside>
+  <main class="w-full flex justify-start flex-col my-2 text-sm">
+    <h6 class="text-md text--darker font-medium"><%= comment.creator.email %></h6>
+    <p class="text--darker">
+      <%= comment.content %>
+    </p>
+  </main>
+</article>
