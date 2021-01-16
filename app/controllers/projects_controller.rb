@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_project, only: %i[edit show update destroy]
   before_action :owner?, only: %i[edit show edit]
 
@@ -41,7 +42,7 @@ class ProjectsController < ApplicationController
     @project.destroy
 
     respond_to do |format|
-      format.html {redirect_to user_projects_path user: current_user}
+      format.html {redirect_to user_projects_path user_id: current_user}
     end
   end
 

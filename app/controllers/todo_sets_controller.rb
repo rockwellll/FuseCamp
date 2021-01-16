@@ -31,7 +31,7 @@ class TodoSetsController < ApplicationController
         render 'todo_sets/remove'
       end
       format.html {
-        redirect_to user_project_todoSets_path(user_id: current_user.id, project_id: @project.id)
+        redirect_to user_project_todo_sets_path(user_id: current_user.id, project_id: @project.id)
       }
     end
   end
