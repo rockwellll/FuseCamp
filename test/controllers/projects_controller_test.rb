@@ -35,6 +35,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "updating projects will redirect to the project index path" do
+    sign_in @user
     project = @project
     patch user_project_path user_id: @user, id: project, params: { project: {name: "updated"} }
 
@@ -45,6 +46,7 @@ class ProjectsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "deleting a project will redirect to projects index path" do
+    sign_in @user
     assert_difference 'Project.count', -1 do
       delete user_project_path user_id: @user, id: @project
     end

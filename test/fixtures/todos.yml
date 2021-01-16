@@ -2,18 +2,18 @@
 
 one:
   creator: one
-  todo_list: one
+  todo_set: one
   name: MyString
   status: false
 
 three:
   creator: one
-  todo_list: one
+  todo_set: one
   name: MyString
   status: true
 
 two:
   creator: two
-  todo_list: two
+  todo_set: two
   name: MyString
   status: false

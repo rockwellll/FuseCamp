@@ -6,13 +6,13 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users :one
     @project = projects :one
-    @todo_set = todo_lists :one
+    @todo_set = todo_sets :one
     @todo = todos :one
   end
 
   test 'deleting a todo should put in trash and perform a soft deletion' do
     sign_in @user
-    delete user_project_todo_list_todo_path user_id: @user, project_id: @project, todo_list_id: @todo_set, id: @todo
+    delete user_project_todo_set_todo_path user_id: @user, project_id: @project, todo_list_id: @todo_set, id: @todo
 
     @todo.reload
 
@@ -24,7 +24,7 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
     sign_in @user
     old_status = @todo.status
 
-    patch user_project_todo_list_todo_path user_id: @user, project_id: @project, todo_list_id: @todo_set, id: @todo
+    patch user_project_todo_set_todo_path user_id: @user, project_id: @project, todo_list_id: @todo_set, id: @todo
 
     @todo.reload
     assert_not_equal @todo.status, old_status

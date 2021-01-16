@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  creator: one
+  boostable_id: 1
+  boostable_type: Comment
+  message: Hurray! Good job
+
+two:
+  creator: two
+  boostable_id: 2
+  boostable_type: Comment
+  message: a second boost message
