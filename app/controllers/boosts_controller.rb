@@ -7,7 +7,10 @@ class BoostsController < ApplicationController
     @boost.creator = current_user
 
     respond_to do |format|
+      if @boost.save
         format.turbo_stream
+
+      end
     end
   end
 

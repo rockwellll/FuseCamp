@@ -1,14 +1,14 @@
 <article
   data-controller="boost"
   id="<%= dom_id boost %>"
-  class="rounded-full bg-white flex items-center justify-start px-2 py-1 my-1 mx-2 relative trix-hidden__block-tools text-xs">
-  <main
+  class="rounded-full bg-white flex items-center justify-center px-2 py-1 my-1 mx-2 relative trix-hidden__block-tools text-xs">
+  <span
     data-action="click->boost#toggleDeleteIconVisibility"
-    class="cursor-pointer">
+    class="cursor-pointer self-start">
     <%= boost.message %>
-  </main>
+  </span>
 
-  <%= form_for boost, method: :delete do %>
+  <%= form_for boost, method: :delete, html: {class: "self-end flex items-center"} do %>
     <button
       data-boost-target="deleteIcon"
       class="focus:outline-none" aria-label="Delete boost">
