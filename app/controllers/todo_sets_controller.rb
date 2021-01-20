@@ -1,10 +1,14 @@
 class TodoSetsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: %i[index create destroy show]
-  before_action :set_todo_list, only: %i[show destroy]
+  before_action :set_project, only: %i[index create destroy show edit]
+  before_action :set_todo_list, only: %i[show destroy edit]
 
   def index
     @todoset = TodoSet.new
+  end
+
+  def edit
+
   end
 
   def create
@@ -27,9 +31,6 @@ class TodoSetsController < ApplicationController
     @id = @todo_set.id
     @todo_set.destroy
     respond_to do |format|
-      format.turbo_stream do
-        render 'todo_sets/remove'
-      end
       format.html {
         redirect_to user_project_todo_sets_path(user_id: current_user.id, project_id: @project.id)
       }

@@ -6,6 +6,6 @@ module Trashable
       where deleted_at: nil
     end
 
-    scope :trashed, -> { unscope(where: :deleted_at)}
+    scope :with_trashed, -> { unscope(where: :deleted_at)}
   end
 end
