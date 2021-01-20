@@ -6,6 +6,4 @@ class Comment < ApplicationRecord
   has_rich_text :content
 
   validates :content, presence: true
-
-  ### TODO: make comments boostable, AKA reactions
 end
