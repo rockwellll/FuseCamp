@@ -1,0 +1,7 @@
+<%= turbo_frame_tag dom_id(@comment) do %>
+
+
+  <section class="rounded-lg bg-body__light flex flex-col items-center justify-between px-4 py-2 my-2 trix-hidden__block-tools w-full">
+    <%= render "form", comment: @comment, commentable: @commentable, project: @project %>
+  </section>
+<% end %>

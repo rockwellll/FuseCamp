@@ -1,6 +1,9 @@
-<%= form_for [current_user, project, commentable, commentable.comments.new] do |f|%>
+<%= form_for [commentable, comment], html: { class: "w-full"}  do |f|%>
   <section class="bg-white p-2 w-full my-2 border border--body rounded-lg">
     <%= f.rich_text_area :content, placeholder: 'Type your comment here' %>
   </section>
-  <button type="submit" class="button__green px-3 py-2 rounded-full focus:outline-none focus:shadow-outline">Add this comment</button>
+  <footer class="w-full flex text-sm">
+    <button type="submit" class="button__green px-3 py-2 rounded-full focus:outline-none focus:shadow-outline">Save Changes</button>
+    <%= link_to "Discard Changes", "", class: "bg-white px-3 py-2 rounded-full border border--green text--green mx-2" %>
+  </footer>
 <% end %>
