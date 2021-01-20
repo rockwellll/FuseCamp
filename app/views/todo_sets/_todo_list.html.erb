@@ -1,5 +1,6 @@
 <article class="my-3 w-full" data-controller="todos">
-    <header class="flex items-end" id="<%= dom_id todo_set %>">
+  <%= turbo_frame_tag dom_id todo_set do %>
+    <header class="flex items-end">
       <svg class="w-5 h-5 text--gray" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M3 7a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 13a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
       </svg>
@@ -8,13 +9,21 @@
           <%= todo_set.display_todos_status %>
           completed
         </h1>
-        <%= link_to todo_set.name, [current_user, @project, todo_set], class: "link underline font-medium mx-2 text-lg" %>
-        <%#= form_tag [current_user, @project, todo_set] do %>
-        <%#= hidden_field_tag :_method, 'delete' %>
-        <!--        <button>submit</button>-->
-        <%# end %>
+        <%= link_to todo_set.name, [current_user, @project, todo_set], class: "link underline font-medium mx-2 text-lg", data: {"turbo-frame": "_top"} %>
       </div>
+
+      <%= link_to edit_user_project_todo_set_path(user_id: current_user, project_id: @project, id: todo_set),
+                  class: "w-full flex items-center hidden",
+                  id: dom_id(todo_set, :edit_link) do %>
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
+        </svg>
+        <span class="inline mx-1">Edit</span>
+      <% end %>
     </header>
+  <% end %>
+
+
 
   <main class="w-full p-2 px-5" id="todos-<%= todo_set.id %>">
     <% if todo_set.todos.count != 0 %>
