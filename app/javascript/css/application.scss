@@ -45,10 +45,26 @@
     opacity: 0;
     right: -100px;
     tab-index: 0;
+    z-index: -100;
 }
 
 .side-nav--animate--in {
     animation: slide-in 400ms ease-in 0s 1 normal forwards;
+}
+
+.aside__button:hover {
+    background-color: #144F97;
+}
+
+.aside__button {
+    font-size: 1rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.aside__button.u-have__border {
+    border-color: #185FB5;
+    @apply border-b;
 }
 
 @keyframes slide-in {
@@ -56,11 +72,13 @@
         opacity: 0;
         right: -100px;
         tab-index: 0;
+        z-index: -100;
     }
     to {
         opacity: 1;
         right: 0;
         tab-index: 1;
+        z-index: 100;
     }
 }
 
@@ -69,11 +87,13 @@
         opacity: 1;
         right: 0;
         tab-index: 1;
+        z-index: 100;
     }
     to {
         opacity: 0;
         right: -100px;
         tab-index: 0;
+        z-index: -100;
     }
 }
 
@@ -187,4 +207,44 @@ trix-editor {
 
 .text--body__lighter {
     color: #BCBBBA;
+}
+
+.expanded .action-sheet__content {
+    visibility: visible;
+    @apply block w-4/12;
+    height: auto;
+}
+
+
+.action-sheet__content {
+    transition: all .2s;
+    visibility: hidden;
+    @apply absolute text-left w-0;
+    overflow-wrap: break-word;
+}
+
+.expanded__boost .new__boost {
+    visibility: visible;
+    @apply block;
+    height: auto;
+    transform: scale(1);
+}
+
+.expanded__boost .toggle__boost {
+    visibility: hidden;
+    @apply hidden;
+    transform: scale(0);
+}
+
+.toggle__boost {
+    visibility: visible;
+    transition: 0.2s all;
+    transform: scale(1);
+}
+
+.new__boost {
+    transition: all .2s;
+    visibility: hidden;
+    overflow-wrap: break-word;
+    transform: scale(0);
 }

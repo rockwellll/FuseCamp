@@ -13,14 +13,14 @@
 
       <ul class="text-sm text--gray">
         <li class="todo__aside__menu__button px-1 outline-none w-full relative z-50">
-          <%= link_to "Edit", edit_user_project_todo_set_todo_path(current_user, todo.todo_set.project, todo.todo_set, todo), class: "" %>
+          <%= link_to "Edit", edit_todo_set_todo_path(todo.todo_set, todo), class: "" %>
         </li>
         <li>Move</li>
         <li>Copy</li>
         <hr class="bg-body my-2"/>
         <li>Archive</li>
         <li>
-          <%= form_tag [current_user, todo.todo_set.project, todo.todo_set, todo] do |f| %>s
+          <%= form_tag [todo.todo_set, todo] do |f| %>s
             <input type="hidden" name="_method" value="delete">
             <button type="submit">
               Delete
@@ -40,7 +40,7 @@
 
 
     <main class="w-full flex todo__container items-center">
-      <%= form_for [current_user, todo.todo_set.project, todo.todo_set, todo], method: :put, class: "flex" do |f| %>
+      <%= form_for [ todo.todo_set, todo], method: :put, class: "flex" do |f| %>
         <%= f.text_field :status, value: !todo.status, class: 'hidden' %>
         <button class="w-5 h-5 rounded border border-gray-400 flex justify-center items-center focus:outline-none" aria-label="toggle update status"></button>
       <% end %>

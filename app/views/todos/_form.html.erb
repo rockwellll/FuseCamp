@@ -1,4 +1,4 @@
-<%= form_for [current_user, todo_list.project, todo_list, todo],
+<%= form_for [current_user, todo_set.project, todo_set, todo],
              data: {controller: "new-todo-form"},
              html: {class: "flex flex-col items-center py-2 px-3 w-full p-2 py-2 px-3 rounded-md border border-gray-300 mt-2", id: dom_id(todo)} do |f| %>
   <div class="flex w-full flex-col mb-3">
@@ -101,6 +101,6 @@
       Add this to-do
     </button>
 
-    <%= link_to "Cancel", user_project_todoSets_path(user_id: current_user, project_id: todo_list.project) %>
+    <%= link_to "Cancel", user_project_todo_sets_path(user_id: current_user, project_id: todo_set.project) %>
   </footer>
 <% end %>
