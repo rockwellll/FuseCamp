@@ -6,8 +6,6 @@ Rails.application.routes.draw do
   root "users#show"
 
   resources :users, path: '' do
-    # resources :projects, except: %i[destroy update]
-
     resources :projects do
       resources :todo_sets, path: 'todosets' do
         resources :todos do
@@ -28,6 +26,7 @@ Rails.application.routes.draw do
   end
 
   resources :boosts, only: [:destroy]
+  resources :comments, only: %i[destroy update]
   # resources :projects, only: %i[index create new show]
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
