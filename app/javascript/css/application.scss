@@ -151,15 +151,15 @@ trix-editor {
 .bg--black--light {
     background: #404040;
 }
-.notification__pop__in {
-    visibility: hidden;
-    transform: scale(0.1);
-    animation: pop-in 1s ease-in-out 0s 1 normal both;
-}
-
-.notification__pop__out {
-    animation: pop-out 600ms ease-in 0s 1 normal forwards;
-}
+//.notification__pop__in {
+//    visibility: hidden;
+//    transform: scale(0.1);
+//    animation: pop-in 1s ease-in-out 0s 1 normal both;
+//}
+//
+//.notification__pop__out {
+//    animation: pop-out 600ms ease-in 0s 1 normal forwards;
+//}
 
 @keyframes pop-in {
     from {
@@ -246,5 +246,17 @@ trix-editor {
     transition: all .2s;
     visibility: hidden;
     overflow-wrap: break-word;
+    transform: scale(0);
+}
+
+.show__notification .notification {
+    visibility: visible;
+    @apply block;
+    transform: scale(1);
+}
+
+.notification {
+    transition: all .2s;
+    visibility: hidden;
     transform: scale(0);
 }
