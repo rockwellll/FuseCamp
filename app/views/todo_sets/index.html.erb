@@ -9,9 +9,22 @@
   </div>
 <% end %>
 
-<section data-controller="todos" style="margin-top: -20px" class="bg-white p-2 w-6/12 min-h-screen shadow flex flex-col items-center">
-  <div id="notification">
+<section
+  data-controller="todos notification"
+  data-notification-content-value="<%= notice %>"
+  style="margin-top: -20px"
+  class="bg-white p-2 w-6/12 min-h-screen shadow flex flex-col items-center">
 
+  <div id="notification" class="notification absolute">
+    <div class="bg--black--light p-1 flex rounded-md text-white text-xs px-2 items-center">
+      <svg class="w-6 h-6 text--green" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+      </svg>
+      <%= notice %>
+      <a href="" class="mx-2">View Trash</a>
+
+      <button type="button" data-action="click->notification#hide">hide</button>
+    </div>
   </div>
 
   <aside class="self-end px-2 py-2">
@@ -85,10 +98,8 @@
   </section>
 
   <main class="w-full md:w-9/12">
-    <%= notice %>
-
     <% @project.todo_sets.each do |todo_list| %>
-      <%= render "todo_sets/todo_list", todo_set: todo_list %>
+      <%= render "todo_sets/todo_set", todo_set: todo_list %>
     <% end %>
   </main>
 </section>
