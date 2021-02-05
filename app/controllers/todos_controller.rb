@@ -11,7 +11,7 @@ class TodosController < ApplicationController
     respond_to do |format|
       if @todo.save
         format.turbo_stream
-        format.html { redirect_to user_project_todoSets_path(user_id: current_user, project_id: @todo_set.project.id), notice: "Success" }
+        format.html { redirect_to user_project_todo_sets_path(user_id: current_user, project_id: @todo_set.project.id), notice: "Success" }
       else
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(@todo, partial: "todos/form", locals: {todo: @todo, todo_set: @todo_set})
@@ -57,7 +57,7 @@ class TodosController < ApplicationController
   private
 
   def set_parent
-    @todo_set = TodoSet.find params[:todo_set_id]
+    @todo_set = TodoSet.unscoped.find params[:todo_set_id]
   end
 
   def todo_params
