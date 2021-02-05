@@ -3,6 +3,6 @@ class TodoSets::CommentsController < CommentsController
 
   private
   def set_commentable
-    @commentable = TodoSet.find params[:todo_set_id]
+    @commentable = TodoSet.unscoped.find params[:todo_set_id]
   end
 end
