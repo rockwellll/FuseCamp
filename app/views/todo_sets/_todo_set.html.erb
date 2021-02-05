@@ -7,6 +7,21 @@
         <%= render todo, todo_set: todo_set %>
       <% end %>
     <% end %>
+
+    <% todo_set.todo_sets.each do |set| %>
+      <div class="flex w-min items-center">
+        <%= link_to [current_user, @project, set] do %>
+          <h1 class="text--gray font-medium"><%= set.name %></h1>
+        <% end %>
+        <hr class="bg-black mx-2 w-3/12">
+      </div>
+
+      <% if set.todos.count != 0 %>
+        <% set.todos.not_completed.each do |todo| %>
+          <%= render todo, todo_set: todo_set %>
+        <% end %>
+      <% end %>
+    <% end %>
   </main>
 
 
@@ -97,6 +112,4 @@
       <% end %>
     </section>
   </footer>
-
-
 </article>
