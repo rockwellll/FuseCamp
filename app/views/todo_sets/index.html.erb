@@ -98,7 +98,7 @@
   </section>
 
   <main class="w-full md:w-9/12">
-    <% @project.todo_sets.each do |todo_list| %>
+    <% @project.todo_sets.not_group.each do |todo_list| %>
       <%= render "todo_sets/todo_set", todo_set: todo_list %>
     <% end %>
   </main>

@@ -8,19 +8,23 @@
       <% end %>
     <% end %>
 
-    <% todo_set.todo_sets.each do |set| %>
-      <div class="flex w-min items-center">
-        <%= link_to [current_user, @project, set] do %>
-          <h1 class="text--gray font-medium"><%= set.name %></h1>
-        <% end %>
-        <hr class="bg-black mx-2 w-3/12">
-      </div>
+    <% todo_set.todo_groups.each do |set| %>
+      <section class="w-full">
+        <div class="flex w-min items-center">
+          <%= link_to [current_user, @project, set] do %>
+            <h1 class="text--gray font-medium"><%= set.name %></h1>
+          <% end %>
+          <hr class="bg-black mx-2 w-3/12">
+        </div>
 
-      <% if set.todos.count != 0 %>
-        <% set.todos.not_completed.each do |todo| %>
-          <%= render todo, todo_set: todo_set %>
-        <% end %>
-      <% end %>
+        <main id="todos-<%= set.id %>">
+          <% if set.todos.count != 0 %>
+            <% set.todos.not_completed.each do |todo| %>
+              <%= render todo, todo_set: todo_set %>
+            <% end %>
+          <% end %>
+        </main>
+      </section>
     <% end %>
   </main>
 
@@ -33,10 +37,6 @@
           </div>
           <%= f.text_field :name, class: "w-full border-b mx-3 border-transparent  focus:outline-none focus:border-gray-300", placeholder: "Describe this to-do" %>
         </div>
-
-        <%# if todo.errors[:name] %>
-        <!--          <small class="text-red-600"><%#= todo.errors[:name][0] %></small>-->
-        <%# end %>
       </div>
       <hr class="w-11/12 bg-gray-400"/>
 
