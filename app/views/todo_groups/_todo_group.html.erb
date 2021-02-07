@@ -1,0 +1,14 @@
+<div class="flex w-min items-center">
+  <%= link_to [current_user, @project, group] do %>
+    <h1 class="text--gray font-medium"><%= group.name %></h1>
+  <% end %>
+  <hr class="bg-black ml-5 w-4/12">
+</div>
+
+<main id="todos-<%= group.id %>">
+  <% if group.todos.count.positive? %>
+    <% group.todos.not_completed.each do |todo| %>
+      <%= render todo, todo_set: group %>
+    <% end %>
+  <% end %>
+</main>
