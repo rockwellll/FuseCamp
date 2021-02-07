@@ -1,9 +1,7 @@
 class TodoSet < ApplicationRecord
   include Commentable, Trashable
 
-  default_scope do
-    where parent_id: nil
-  end
+  scope :not_group, -> {where parent_id: nil}
 
   belongs_to :project
   belongs_to :creator, foreign_key: 'creator_id', class_name: 'User'
@@ -11,12 +9,24 @@ class TodoSet < ApplicationRecord
   has_many :todos
 
   belongs_to :parent, class_name: 'TodoSet', optional: true
-  has_many :todo_sets, class_name: 'TodoSet', foreign_key: 'parent_id', dependent: :destroy
+  has_many :todo_groups, class_name: 'TodoSet', foreign_key: 'parent_id', dependent: :destroy
 
   before_destroy :destroy_all_todos
 
   def completed_todos
     todos.where(status: true).count
+  end
+
+  def all_todos
+    count = todos.count
+    todo_groups.each do |todo_set|
+      count += todo_set.todos.count
+    end
+    count
+  end
+
+  def a_group?
+    parent_id?
   end
 
   def has_todos?
@@ -29,7 +39,7 @@ class TodoSet < ApplicationRecord
   end
 
   def display_todos_status
-    "#{completed_todos} / #{todos.count}"
+    "#{completed_todos} / #{all_todos}"
   end
 
   private
