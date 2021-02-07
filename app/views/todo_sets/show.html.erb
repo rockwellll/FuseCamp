@@ -11,13 +11,15 @@
 
 <section
   id="<%= dom_id(@todo_set, :show) %>"
-  data-controller="todos notification"
+  data-controller="todos notification collapse"
   data-notification-show-value="<%= notice.nil? %>"
   style="margin-top: -20px;"
   class="bg-white p-2 w-full md:w-6/12 min-h-screen shadow flex flex-col items-center border-b pb-5 relative">
   <div id="notification" class="notification absolute">
     <div class="bg--black--light p-1 flex rounded-md text-white text-xs px-2">
-      <svg class="w-6 h-6 text--green" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+      <svg class="w-6 h-6 text--green" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+      </svg>
       The to-do is in the trash
       <a href="" class="mx-2">View Trash</a>
 
@@ -102,14 +104,14 @@
             <% end %>
 
           <% else %>
-            <%= form_for [current_user, @project, @todo_set], method: :delete do %>
-              <button class="w-full flex items-center focus:outline-none">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
-                </svg>
-                <span class="mx-1">Add a group</span>
-              </button>
-            <% end %>
+            <button
+              data-action="click->collapse#show click->settings-container#hideContainerBeforeSubmitting"
+              class="w-full flex items-center focus:outline-none">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="mx-1">Add a group</span>
+            </button>
           <% end %>
         </li>
 
@@ -180,6 +182,7 @@
   </aside>
 
   <main class="w-full md:w-9/12">
+
     <%= render "todo_sets/todo_set", todo_set: @todo_set %>
 
     <div class="w-full flex items-center">
