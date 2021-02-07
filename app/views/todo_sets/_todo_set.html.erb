@@ -2,31 +2,41 @@
   <%= render 'todo_sets/partials/header', todo_set: todo_set %>
 
   <main class="w-full p-2 px-5" id="todos-<%= todo_set.id %>">
-    <% if todo_set.todos.count != 0 %>
+    <% if todo_set.todos.count.positive? %>
       <% todo_set.todos.not_completed.each do |todo| %>
         <%= render todo, todo_set: todo_set %>
       <% end %>
     <% end %>
 
-    <% todo_set.todo_groups.each do |set| %>
-      <section class="w-full">
-        <div class="flex w-min items-center">
-          <%= link_to [current_user, @project, set] do %>
-            <h1 class="text--gray font-medium"><%= set.name %></h1>
-          <% end %>
-          <hr class="bg-black mx-2 w-3/12">
-        </div>
-
-        <main id="todos-<%= set.id %>">
-          <% if set.todos.count != 0 %>
-            <% set.todos.not_completed.each do |todo| %>
-              <%= render todo, todo_set: todo_set %>
-            <% end %>
-          <% end %>
-        </main>
-      </section>
-    <% end %>
+    <section class="w-full">
+      <% todo_set.todo_groups.each do |set| %>
+        <%= render 'todo_groups/todo_group', group: set %>
+      <% end %>
+    </section>
   </main>
+
+  <section class="w-full">
+    <%= form_for [TodoSet.new],
+                 url: todo_set_todo_groups_path(todo_set_id: todo_set),
+                 html: {class: "flex items-end py-2 px-3 w-full py-2 px-3 rounded-md border-2 border-gray-300 mt-2"},
+                 data: {'collapse-target': 'collapsible'} do |f| %>
+      <section class="flex w-8/12 flex-col mb-3 border-b p-1">
+        <div class="w-full flex">
+          <%= f.text_field :name, class: "w-full focus:outline-none font-medium", placeholder: "Add a new group..." %>
+        </div>
+      </section>
+
+      <aside class="w-4/12 ml-2">
+        <button class="button__green rounded-full text-sm px-3 py-1 text-white focus:outline-none">
+          Add this to-do
+        </button>
+
+        <button type="button" data-action="todos#hideForm" class="border border--green rounded-full text-sm px-3 py-1 text--green focus:outline-none">
+          Cancel
+        </button>
+      </aside>
+    <% end %>
+  </section>
 
 
   <section class="w-full">
