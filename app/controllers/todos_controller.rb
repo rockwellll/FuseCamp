@@ -57,7 +57,7 @@ class TodosController < ApplicationController
   private
 
   def set_parent
-    @todo_set = TodoSet.unscoped.find params[:todo_set_id]
+    @todo_set = TodoSet.find params[:todo_set_id]
   end
 
   def todo_params
