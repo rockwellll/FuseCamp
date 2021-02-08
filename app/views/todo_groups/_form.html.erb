@@ -1,0 +1,41 @@
+<section
+  data-controller="color-picker"
+  data-color-picker-color-value="white"
+  class="w-full">
+
+<%= form_for [TodoSet.new],
+             url: todo_set_todo_groups_path(todo_set_id: todo_set),
+             html: {class: "flex flex-col items-end py-2 px-3 w-full py-2 px-3 rounded-md border-2 border-gray-300 mt-2"},
+             data: {
+                 'collapse-target': 'collapsible',
+                 'action': 'turbo:submit-end->color-picker#reset turbo:submit-end->collapse#hide'
+             } do |f| %>
+  <section class="w-full flex items-end">
+    <section class="flex w-8/12 flex-col mb-3 border-b p-1">
+      <div class="w-full flex">
+        <%= f.text_field :name,
+                         class: "w-full focus:outline-none font-medium bg-transparent",
+                         placeholder: "Add a new group...",
+                         data: {'color-picker-target': 'input'}
+        %>
+      </div>
+    </section>
+
+    <aside class="w-4/12 ml-2">
+      <button class="button__green rounded-full text-sm px-3 py-1 text-white focus:outline-none">
+        Add this group
+      </button>
+
+      <button
+        type="button"
+        data-action="click->collapse#hide click->color-picker#reset" class="border border--green rounded-full text-sm px-3 py-1 text--green focus:outline-none">
+        Cancel
+      </button>
+    </aside>
+
+  </section>
+  <footer class="w-full">
+    <%= render partial: 'shared/color_picker/picker' %>
+  </footer>
+<% end %>
+</section>

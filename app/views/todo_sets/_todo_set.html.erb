@@ -15,29 +15,7 @@
     </section>
   </main>
 
-  <section class="w-full">
-    <%= form_for [TodoSet.new],
-                 url: todo_set_todo_groups_path(todo_set_id: todo_set),
-                 html: {class: "flex items-end py-2 px-3 w-full py-2 px-3 rounded-md border-2 border-gray-300 mt-2"},
-                 data: {'collapse-target': 'collapsible'} do |f| %>
-      <section class="flex w-8/12 flex-col mb-3 border-b p-1">
-        <div class="w-full flex">
-          <%= f.text_field :name, class: "w-full focus:outline-none font-medium", placeholder: "Add a new group..." %>
-        </div>
-      </section>
-
-      <aside class="w-4/12 ml-2">
-        <button class="button__green rounded-full text-sm px-3 py-1 text-white focus:outline-none">
-          Add this to-do
-        </button>
-
-        <button type="button" data-action="todos#hideForm" class="border border--green rounded-full text-sm px-3 py-1 text--green focus:outline-none">
-          Cancel
-        </button>
-      </aside>
-    <% end %>
-  </section>
-
+  <%= render 'todo_groups/form', todo_set: todo_set %>
 
   <section class="w-full">
     <%= form_for [todo_set, todo_set.todos.new], html: {class: "flex flex-col items-center py-2 px-3 w-full p-2 py-2 px-3 rounded-md border border-gray-300 mt-2 hidden"}, data: {"todos-target": "form"} do |f| %>
