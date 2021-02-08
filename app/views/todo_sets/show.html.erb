@@ -93,8 +93,8 @@
 
         <li class="relative my-1 px-3 py-1 aside__button u-have__border">
 
-          <% if @todo_set.a_group? %>
-            <%= form_for [current_user, @project, @todo_set], method: :delete do %>
+          <% if @todo_set.parent_id? %>
+            <%= form_for [current_user, @project, @todo_set], url: todo_set_promote_path(todo_set_id: @todo_set), method: :delete, data: {'turbo-frame': '_top'} do %>
               <button class="w-full flex items-center focus:outline-none">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
@@ -182,8 +182,7 @@
   </aside>
 
   <main class="w-full md:w-9/12">
-
-    <%= render "todo_sets/todo_set", todo_set: @todo_set %>
+    <%= render "todo_sets/todo_set", todo_set: @todo_set, show_group: @todo_set.group? %>
 
     <div class="w-full flex items-center">
       <% if @todo_set.comments.empty? %>
