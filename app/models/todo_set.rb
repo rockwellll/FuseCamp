@@ -25,8 +25,8 @@ class TodoSet < ApplicationRecord
     count
   end
 
-  def a_group?
-    parent_id?
+  def group?
+    !parent_id?
   end
 
   def has_todos?
