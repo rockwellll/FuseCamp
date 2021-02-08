@@ -1,6 +1,6 @@
-<div class="flex w-min items-center">
+<div class="flex w-min items-center my-1">
   <%= link_to [current_user, @project, group] do %>
-    <h1 class="text--gray font-medium"><%= group.name %></h1>
+    <h1 class="text--gray font-medium bg-<%= group.color.hex if group.color %>-200"><%= group.name %></h1>
   <% end %>
   <hr class="bg-black ml-5 w-4/12">
 </div>
