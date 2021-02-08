@@ -184,7 +184,7 @@
   <main class="w-full md:w-9/12">
     <%= render "todo_sets/todo_set", todo_set: @todo_set, show_group: @todo_set.group? %>
 
-    <div class="w-full flex items-center">
+    <div class="w-full flex items-center" id="comments-count-container">
       <% if @todo_set.comments.empty? %>
         <div class="w-4/12">
           <h1 class="text-xl">Discussion</h1>
@@ -193,7 +193,9 @@
       <% else %>
 
         <div class=" flex items-center justify-center w-3/12">
-          <h1 class="bg--blue rounded-full h-10 w-10 text-center text-white text-2xl rounded-full">
+          <h1
+            id="comments-count"
+            class="bg--blue rounded-full h-10 w-10 text-center text-white text-2xl rounded-full">
             <%= @todo_set.comments.count %>
           </h1>
           <span class="mx-2 text--darker font-bold">Comments</span>
