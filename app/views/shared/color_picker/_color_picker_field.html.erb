@@ -1,0 +1,11 @@
+<label class="relative color-picker__field">
+  <input
+    data-action="change->color-picker#pick"
+    data-color-picker-target="radio"
+    type="radio"
+    name="color"
+    class="color_picker__checked absolute top-0 left-0 z-0 opacity-0"
+    value="<%= color %>"
+    id="color-<%= color %>">
+  <span class="color_picker bg-<%= color %>-200"></span>
+</label>
