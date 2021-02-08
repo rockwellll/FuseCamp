@@ -15,8 +15,9 @@
     </section>
   </main>
 
-  <%= render 'todo_groups/form', todo_set: todo_set %>
-
+  <% if show_group || false %>
+    <%= render 'todo_groups/form', todo_set: todo_set %>
+  <% end %>
   <section class="w-full">
     <%= form_for [todo_set, todo_set.todos.new], html: {class: "flex flex-col items-center py-2 px-3 w-full p-2 py-2 px-3 rounded-md border border-gray-300 mt-2 hidden"}, data: {"todos-target": "form"} do |f| %>
       <div class="flex w-full flex-col mb-3">
