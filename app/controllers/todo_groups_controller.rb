@@ -12,6 +12,8 @@ class TodoGroupsController < ApplicationController
 
     respond_to do |format|
       @todo_group.save!
+      Color.create! hex: params[:color], colorable: @todo_group
+
       format.turbo_stream do
         render turbo_stream: turbo_stream.append("todos-#{@todo_set.id}", partial: 'todo_groups/todo_group', locals: {group: @todo_group, todo_set: @todo_set})
       end
