@@ -20,9 +20,8 @@ Rails.application.routes.draw do
     resources :comments, module: :todo_sets
     resources :todos
 
-    resources :todo_groups, path: "groups", only: %i[create] do
-      post '/promote', to: 'todo_groups#promote'
-    end
+    resources :todo_groups, path: "groups", only: %i[create]
+    delete '/promote', to: 'todo_groups#destroy'
   end
 
   resources :comments do
