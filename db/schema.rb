@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_15_203506) do
+ActiveRecord::Schema.define(version: 2021_02_07_212627) do
 
   create_table "action_text_rich_texts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(version: 2021_01_15_203506) do
     t.index ["user_id"], name: "index_boosts_on_user_id"
   end
 
+  create_table "colors", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "hex", null: false
+    t.string "colorable_type", null: false
+    t.bigint "colorable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["colorable_type", "colorable_id"], name: "index_colors_on_colorable_type_and_colorable_id"
+  end
+
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "commentable_type"
@@ -89,6 +98,15 @@ ActiveRecord::Schema.define(version: 2021_01_15_203506) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "todo_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "todo_set_id", null: false
+    t.bigint "parent_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["parent_id"], name: "index_todo_groups_on_parent_id"
+    t.index ["todo_set_id"], name: "index_todo_groups_on_todo_set_id"
+  end
+
   create_table "todo_sets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "creator_id", null: false
     t.bigint "project_id", null: false
@@ -96,7 +114,10 @@ ActiveRecord::Schema.define(version: 2021_01_15_203506) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.bigint "parent_id"
     t.index ["creator_id"], name: "index_todo_sets_on_creator_id"
+    t.index ["parent_id"], name: "index_todo_sets_on_parent_id"
     t.index ["project_id"], name: "index_todo_sets_on_project_id"
   end
 
@@ -151,7 +172,10 @@ ActiveRecord::Schema.define(version: 2021_01_15_203506) do
   add_foreign_key "project_users", "projects"
   add_foreign_key "project_users", "users"
   add_foreign_key "projects", "users"
+  add_foreign_key "todo_groups", "todo_sets"
+  add_foreign_key "todo_groups", "todo_sets", column: "parent_id"
   add_foreign_key "todo_sets", "projects"
+  add_foreign_key "todo_sets", "todo_sets", column: "parent_id"
   add_foreign_key "todo_sets", "users", column: "creator_id"
   add_foreign_key "todos", "todo_sets"
   add_foreign_key "todos", "users"
