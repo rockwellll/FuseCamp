@@ -260,3 +260,18 @@ trix-editor {
     visibility: hidden;
     transform: scale(0);
 }
+
+.color-picker__field {
+    @apply inline-block h-auto;
+    margin: 0 5px 0 0;
+}
+
+.color_picker {
+    width: 20px;
+    height: 20px;
+    @apply rounded-full inline-block border border-transparent;
+}
+
+.color_picker__checked:checked ~ .color_picker {
+    @apply border-black;
+}
