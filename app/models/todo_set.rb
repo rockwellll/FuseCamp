@@ -1,5 +1,5 @@
 class TodoSet < ApplicationRecord
-  include Commentable, Trashable
+  include Commentable, Trashable, Colorful
 
   scope :not_group, -> {where parent_id: nil}
 
