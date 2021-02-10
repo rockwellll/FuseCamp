@@ -1,4 +1,4 @@
 class TrashItem < ApplicationRecord
   belongs_to :trash
-  belongs_to :trashable, polymorphic: true
+  delegated_type :trashable, types: %w[Todo TodoSet]
 end
