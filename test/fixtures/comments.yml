@@ -1,13 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  creator: one
-  commentable_id: one
-  commentable_type: TodoSet
+  creator: one (User)
+  commentable: one (TodoSet)
   content: Comment made by user one
 
 two:
-  creator: two
-  commentable_id: one
-  commentable_type: TodoSet
+  creator: one(User)
+  commentable: one (TodoSet)
   content: comment made by user two
