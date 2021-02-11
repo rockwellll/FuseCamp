@@ -9,7 +9,9 @@ class BoostsController < ApplicationController
     respond_to do |format|
       if @boost.save
         format.turbo_stream
-
+        format.html do
+          redirect_back fallback_location: root_path
+        end
       end
     end
   end
@@ -19,6 +21,9 @@ class BoostsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream { render 'boosts/remove'}
+      format.html do
+        redirect_back fallback_location: root_path, notice: "deleted successfully"
+      end
     end
   end
 
