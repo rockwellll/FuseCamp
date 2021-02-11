@@ -2,6 +2,7 @@ class TodoSet < ApplicationRecord
   include Commentable, Trashable, Colorful
 
   scope :not_group, -> {where parent_id: nil}
+  scope :groups, -> {where.not parent_id: nil }
 
   belongs_to :project
   belongs_to :creator, foreign_key: 'creator_id', class_name: 'User'
