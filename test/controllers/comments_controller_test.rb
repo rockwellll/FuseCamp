@@ -7,7 +7,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users :one
     @todo_set = todo_sets :two
-    @project = projects :two
+    @project = projects :one
     sign_in @user
   end
 
@@ -21,5 +21,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'Comment.count', -1 do
       delete comment_path comments(:one)
     end
+
+    assert_redirected_to user_project_path(user_id: @user, id: @project)
   end
 end
