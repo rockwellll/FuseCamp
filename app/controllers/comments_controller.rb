@@ -40,7 +40,7 @@ class CommentsController < ApplicationController
       end
 
       format.html do
-        redirect_back fallback_location: user_project_path(user_id: current_user, project_id: @project), notice: 'Comment was removed'
+        redirect_back fallback_location: user_project_path(user_id: current_user, id: @commentable.project), notice: 'Comment was removed'
       end
     end
   end
