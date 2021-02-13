@@ -275,3 +275,16 @@ trix-editor {
 .color_picker__checked:checked ~ .color_picker {
     @apply border-black;
 }
+
+
+.color__blue {
+    color: #1B6AC9;
+}
+
+.bg__orange {
+    background-color: #FFA235;
+}
+
+.color__orange {
+    color: #FFA235;
+}
