@@ -28,7 +28,7 @@ class TodoGroupsController < ApplicationController
     @todo_set.update parent: nil
     respond_to do |format|
       format.html do
-        redirect_to user_project_todo_set_path(user_id: current_user, project_id: @todo_set.project, id: @todo_set), notice: "This is now a list"
+        redirect_back fallback_location: user_project_todo_set_path(user_id: current_user, project_id: @todo_set.project, id: @todo_set), notice: "This is now a list"
       end
     end
   end
