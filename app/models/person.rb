@@ -6,4 +6,6 @@ class Person < ApplicationRecord
 
   delegate :email, to: :user
   delegate :name, to: :user
+
+  accepts_nested_attributes_for :user
 end
