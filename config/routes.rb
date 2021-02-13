@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'peoples/index'
   get 'accounts/show'
   resources :t1s
   resources :projects
@@ -6,12 +7,9 @@ Rails.application.routes.draw do
   devise_for :users
   root "users#show"
 
-  resources :accounts, path: '' do
+  resources :accounts, path: 'account' do
     resources :peoples
-
-    resources :projects do
-
-    end
+    resources :companies
   end
 
   resources :users, path: '' do
