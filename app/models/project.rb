@@ -3,7 +3,7 @@ class Project < ApplicationRecord
   belongs_to :user
   has_one :trash, dependent: :destroy
 
-  has_many :members, class_name: 'ProjectUser', dependent: :delete_all
+  has_many :people, class_name: 'Person', dependent: :delete_all
   has_many :todo_sets, dependent: :destroy
   has_many :todos, through: :todo_sets
 
