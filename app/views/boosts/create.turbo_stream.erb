@@ -1,1 +1,1 @@
-<%= turbo_stream.prepend dom_id(@boost.boostable, :boosts), @boost %>
+<%= turbo_stream.prepend  dom_id(@boost.boostable, :boosts), partial: "boosts/boost", locals: {boost: @boost} %>
