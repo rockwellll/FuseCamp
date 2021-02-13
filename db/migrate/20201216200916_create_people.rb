@@ -2,8 +2,9 @@ class CreatePeoples < ActiveRecord::Migration[6.1]
   def change
     create_table :peoples do |t|
       t.belongs_to :user, null: false, foreign_key: true
-      t.belongs_to :company, null: false, foreign_key: true
-      t.belongs_to :project, null: false, foreign_key: true
+      t.belongs_to :company, null: true, foreign_key: true
+      t.belongs_to :project, null: true, foreign_key: true
+      t.belongs_to :account, null: false, foreign_key: true
 
       t.timestamps
     end
