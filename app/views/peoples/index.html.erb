@@ -1,0 +1,57 @@
+<%= link_to user_account_path(user_id: current_user), class: "w-5/12" do %>
+  <div style="background: #FCFCFB" class="w-full rounded flex justify-center pb-5 shadow-md items-center">
+    <svg class="w-4 h-4 text-blue-700 mx-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path>
+    </svg>
+    <h1 class="text-blue-700 underline">
+      Adminland
+    </h1>
+  </div>
+<% end %>
+
+<section class="bg-white p-2 w-6/12 min-h-screen shadow flex flex-col items-center" style="margin-top: -20px">
+
+  <header class="flex justify-between items-end w-10/12 border-black border-b-2 pb-2 my-2">
+    <div class="w-6/12">
+      <button data-action="click->todos#showForm" class="flex items-center px-2 text-xs text-white py-1 rounded-full bg--green focus:outline-none focus:shadow-outline">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+        </svg>
+        Add someone
+      </button>
+    </div>
+
+    <div class="w-full">
+      <h1 class="text-3xl w-full font-medium text--darker m-0">
+        Everyone on the account
+      </h1>
+    </div>
+  </header>
+
+
+  <main class="w-9/12 p-2">
+    <input placeholder="Jump to person" type="text" class="w-full rounded bg-white focus:outline-none focus:shadow-outline border border-gray-400 p-1 my-2">
+
+    <% @members.each do |person| %>
+        <article>
+          <h1 class="text--gray font-medium text-sm m-0"><%= person.name %></h1>
+          <span class="text--gray text-xs"><%= person.email %></span>
+          <footer class="color__blue text-xs">
+            <a href="" class="inline-block underline">Edit</a>
+
+            <span>
+              •
+            </span>
+            <a href="" class="inline-block underline">Change access</a>
+
+            <span>
+              •
+            </span>
+
+            <a href="" class="inline-block underline">Send a link to log-in</a>
+          </footer>
+        </article>
+    <% end %>
+  </main>
+
+</section>
