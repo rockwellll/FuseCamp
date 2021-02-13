@@ -1,0 +1,56 @@
+<%= link_to account_peoples_path(account_id: current_user.account), class: "w-5/12" do %>
+  <div style="background: #FCFCFB" class="w-full rounded flex justify-center pb-5 shadow-md items-center">
+    <svg class="w-4 h-4 text-blue-700 mx-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path>
+    </svg>
+    <h1 class="text-blue-700 underline">
+      Adminland > Everyone
+    </h1>
+  </div>
+<% end %>
+
+<section class="bg-white p-2 w-6/12 min-h-screen shadow flex flex-col items-center" style="margin-top: -20px">
+  <header class="flex justify-center w-10/12 border-black border-b-2 pb-2 my-2">
+    <h1 class="text-3xl font-medium text--darker m-0">
+      Add someone to your team
+    </h1>
+  </header>
+
+  <span class="text--gray">
+    Teammates get full access to the entirety of a project they’re added to.
+  </span>
+
+  <main class="w-9/12 flex flex-col items-center">
+    <%= form_for @person, url: root_path, html: {class: "w-full flex flex-col"} do |form| %>
+      <%= form.fields_for :user, User.new do |user_form| %>
+        <div class="flex flex-col my-2">
+          <div>
+            <%= user_form.label :name, 'Name', class: 'text--darker' %>
+            <span class="text--gray font-medium required" >Required</span>
+          </div>
+          <%= user_form.text_field :name, class: "w-full rounded bg-white focus:outline-none focus:shadow-outline border border-gray-400 p-1 ", placeholder: "Name" %>
+        </div>
+        <div class="flex flex-col my-2">
+          <div>
+            <%= user_form.label :email, 'Email', class: 'text-darker' %>
+            <span class="text--gray font-medium required">Required</span>
+          </div>
+          <%= user_form.email_field :email, class: "w-full rounded bg-white focus:outline-none focus:shadow-outline border border-gray-400 p-1 ", placeholder: "Email" %>
+        </div>
+      <% end %>
+        <div class="flex flex-col my-2">
+          <%= form.label :company, 'Company/Organization' %>
+
+          <select name="company" id="" class="w-full rounded bg-white focus:outline-none focus:shadow-outline border border-gray-400 p-1 ">
+            <%= @account.companies.each do |company| %>
+              <option value="<%= company.name %>"><%= company.name %></option>
+            <% end %>
+          </select>
+        </div>
+
+        <div>
+          <button type="submit" class="button__green rounded-full px-3 py-1 text-sm focus:outline-none focus:shadow-outline">Next, What they can access</button>
+        </div>
+    <% end %>
+  </main>
+</section>

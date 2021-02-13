@@ -6,6 +6,10 @@ class PeoplesController < ApplicationController
     @members = @account.people
   end
 
+  def new
+    @person = Person.new
+  end
+
   private
   def set_account
     @account = Account.find params[:account_id]
