@@ -14,6 +14,8 @@
           <%= f.password_field :password, autocomplete: "new-password", class: "w-full rounded bg-white focus:outline-none focus:shadow-outline border border-gray-400 p-1 my-2", placeholder: "password" %>
         </div>
 
+        <%= f.hidden_field :is_member, value: 0 %>
+
         <!--        <div class="field">-->
         <%#= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full rounded bg-white focus:outline-none focus:shadow-outline border border-gray-400 p-1", placeholder: "confirm password" %>
         <!--        </div>-->
