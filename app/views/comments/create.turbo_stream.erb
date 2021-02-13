@@ -1,4 +1,4 @@
-<%= turbo_stream.append "comments", @comment %>
+<%= turbo_stream.append 'comments', partial: "comments/comment", locals: {comment: @comment} %>
 
 <%= turbo_stream.replace "comments-count-container" do %>
   <div class="w-full flex items-center" id="comments-count-container">
