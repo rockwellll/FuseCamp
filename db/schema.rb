@@ -89,16 +89,17 @@ ActiveRecord::Schema.define(version: 2021_02_10_070103) do
     t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
-  create_table "peoples", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "people", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "company_id", null: false
-    t.bigint "project_id", null: false
+    t.bigint "company_id"
+    t.bigint "project_id"
+    t.bigint "account_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id", "user_id", "project_id"], name: "index_peoples_on_company_id_and_user_id_and_project_id", unique: true
-    t.index ["company_id"], name: "index_peoples_on_company_id"
-    t.index ["project_id"], name: "index_peoples_on_project_id"
-    t.index ["user_id"], name: "index_peoples_on_user_id"
+    t.index ["account_id"], name: "index_people_on_account_id"
+    t.index ["company_id"], name: "index_people_on_company_id"
+    t.index ["project_id"], name: "index_people_on_project_id"
+    t.index ["user_id"], name: "index_people_on_user_id"
   end
 
   create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -170,6 +171,8 @@ ActiveRecord::Schema.define(version: 2021_02_10_070103) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_member", null: false
+    t.text "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -179,9 +182,10 @@ ActiveRecord::Schema.define(version: 2021_02_10_070103) do
   add_foreign_key "boosts", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "companies", "users"
-  add_foreign_key "peoples", "companies"
-  add_foreign_key "peoples", "projects"
-  add_foreign_key "peoples", "users"
+  add_foreign_key "people", "accounts"
+  add_foreign_key "people", "companies"
+  add_foreign_key "people", "projects"
+  add_foreign_key "people", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "todo_sets", "projects"
   add_foreign_key "todo_sets", "todo_sets", column: "parent_id"
