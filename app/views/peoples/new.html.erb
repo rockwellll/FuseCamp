@@ -20,9 +20,13 @@
     Teammates get full access to the entirety of a project they’re added to.
   </span>
 
-  <main class="w-9/12 flex flex-col items-center">
-    <%= form_for @person, url: root_path, html: {class: "w-full flex flex-col"} do |form| %>
-      <%= form.fields_for :user, User.new do |user_form| %>
+  <main class="w-8/12 flex flex-col items-center">
+    <%= form_for @person, url: account_peoples_path(account_id: @account), html: {class: "w-full flex flex-col"} do |form| %>
+      <%= debug @person.errors[:job_title] %>
+      <% unless @person.errors[:job_title].nil? %>
+        <small class="text-red-600"><%= @person.errors[:job_title][0] %></small>
+      <% end %>
+      <%= form.fields_for :user, @user do |user_form| %>
         <div class="flex flex-col my-2">
           <div>
             <%= user_form.label :name, 'Name', class: 'text--darker' %>
@@ -36,12 +40,25 @@
             <span class="text--gray font-medium required">Required</span>
           </div>
           <%= user_form.email_field :email, class: "w-full rounded bg-white focus:outline-none focus:shadow-outline border border-gray-400 p-1 ", placeholder: "Email" %>
+          <% if @user.errors[:email] %>
+            <small class="text-red-600"><% debug @user.errors[:email] %></small>
+          <% end %>
+          <%= user_form.hidden_field :password, value: "11223344" %>
         </div>
       <% end %>
+      <div class="flex flex-col my-2">
+        <div>
+          <%= form.label :job_title, 'Job Title', class: 'text-darker' %>
+          <span class="text--gray font-medium required">Required</span>
+        </div>
+        <%= form.text_field :job_title, class: "w-full rounded bg-white focus:outline-none focus:shadow-outline border border-gray-400 p-1 ", placeholder: "Email" %>
+      </div>
+
         <div class="flex flex-col my-2">
           <%= form.label :company, 'Company/Organization' %>
 
           <select name="company" id="" class="w-full rounded bg-white focus:outline-none focus:shadow-outline border border-gray-400 p-1 ">
+            <option selected class="text--gray text-sm">Type organization name</option>
             <%= @account.companies.each do |company| %>
               <option value="<%= company.name %>"><%= company.name %></option>
             <% end %>
