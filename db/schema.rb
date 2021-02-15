@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_10_070103) do
+ActiveRecord::Schema.define(version: 2021_02_15_071115) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -105,6 +105,15 @@ ActiveRecord::Schema.define(version: 2021_02_10_070103) do
     t.index ["user_id"], name: "index_people_on_user_id"
   end
 
+  create_table "people_projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "person_id", null: false
+    t.bigint "project_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_people_projects_on_person_id"
+    t.index ["project_id"], name: "index_people_projects_on_project_id"
+  end
+
   create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
@@ -190,6 +199,8 @@ ActiveRecord::Schema.define(version: 2021_02_10_070103) do
   add_foreign_key "people", "companies"
   add_foreign_key "people", "projects"
   add_foreign_key "people", "users"
+  add_foreign_key "people_projects", "people"
+  add_foreign_key "people_projects", "projects"
   add_foreign_key "projects", "users"
   add_foreign_key "todo_sets", "projects"
   add_foreign_key "todo_sets", "todo_sets", column: "parent_id"
