@@ -3,7 +3,9 @@
 one:
   name: MyString
   account: one
+  user: one
 
 two:
   name: MyString
   account: two
+  user: two
