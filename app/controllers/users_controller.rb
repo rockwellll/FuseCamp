@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def show
 
-    redirect_to user_projects_path current_user
+    redirect_to account_project_path current_user
   end
 
 

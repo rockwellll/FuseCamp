@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :projects
 
   devise_for :users
-  root "users#show"
+  root "projects#index"
 
   resources :accounts, path: '' do
     resources :peoples
