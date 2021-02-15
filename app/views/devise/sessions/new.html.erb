@@ -7,7 +7,7 @@
       <h1 class="text--darker font-medium text-2xl self-center">
         Login to Basecamp 3
       </h1>
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "p-4 w-full"}) do |f| %>
+      <%= form_for(resource, as: resource_name, url: user_session_path, html: {class: "p-4 w-full"}) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="break relative py-3 my-2 flex justify-center">

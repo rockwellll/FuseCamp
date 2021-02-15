@@ -15,7 +15,6 @@ class ApplicationController < ActionController::Base
     set_current_tenant current_user
   end
 
-
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :is_member])
