@@ -1,7 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: %i[edit show update destroy]
-  before_action :owner?, only: %i[edit show edit]
   before_action :set_account
 
 
@@ -33,7 +32,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.update(project_params)
         format.html do
-          redirect_to user_projects_path(user_id: current_user), notice: "Project successfuly updated"
+          redirect_to account_projects_path(account_id: @account), notice: "Project successfuly updated"
         end
       end
     end
@@ -43,7 +42,7 @@ class ProjectsController < ApplicationController
     @project.destroy
 
     respond_to do |format|
-      format.html {redirect_to user_projects_path user_id: current_user}
+      format.html {redirect_to account_projects_path account_id: @account}
     end
   end
 
