@@ -173,7 +173,7 @@
         <img class="self-center mt-5 mb-1" width="70" height="70" src="https://bc3-production-assets-cdn.basecamp-static.com/assets/logos/paperclip-logo-349bf403c234be9d67457f2825054e138f6d54affe467717f3da909cab741cba.svg" alt="">
         <h6 class="font-medium text--darker">Welcome to <%= @project.name %>!</h6>
         <small>
-          <%= @project.user.email %> created this <%= @project.created_at.strftime("%F") %>
+          <%= @project.account.email %> created this <%= @project.created_at.strftime("%F") %>
         </small>
       </header>
 
