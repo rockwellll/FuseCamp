@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: %i[edit show update destroy]
   before_action :owner?, only: %i[edit show edit]
+  before_action :set_account
 
 
   def new
@@ -11,11 +12,11 @@ class ProjectsController < ApplicationController
   def index; end
 
   def create
-    @project = current_user.projects.new project_params
+    @project = @account.projects.new project_params
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to user_projects_path(user_id: current_user), notice: 'Project successfully created.' }
+        format.html { redirect_to account_projects_path(account_id: @account), notice: 'Project successfully created.' }
         format.json { render :show, status: :created, location: @t1 }
       else
         format.html { render :new }
@@ -58,5 +59,9 @@ class ProjectsController < ApplicationController
 
   def owner?
     current_user.id == Project.find(params[:id]).user_id
+  end
+
+  def set_account
+    @account = Account.find params[:account_id]
   end
 end
