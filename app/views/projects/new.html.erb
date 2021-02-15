@@ -4,7 +4,7 @@
     All right, let’s get your project started!
   </h1>
 
-  <%= form_for @project, html: {class: "flex flex-col my-2 w-full md:w-6/12"} do  |f| %>
+  <%= form_for [@account, @project], html: {class: "flex flex-col my-2 w-full md:w-6/12"} do  |f| %>
     <% if @project.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@project.errors.count, "error") %> prohibited this t1 from being saved:</h2>

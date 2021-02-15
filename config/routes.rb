@@ -7,13 +7,9 @@ Rails.application.routes.draw do
   devise_for :users
   root "users#show"
 
-  resources :accounts, path: 'account' do
+  resources :accounts, path: '' do
     resources :peoples
     resources :companies
-  end
-
-  resources :users, path: '' do
-    get '/account', to: 'accounts#show'
 
     resources :projects do
       resources :todo_sets, path: 'todosets' do
@@ -24,6 +20,19 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  # resources :users, path: '' do
+  #   get '/account', to: 'accounts#show'
+  #
+  #   resources :projects do
+  #     resources :todo_sets, path: 'todosets' do
+  #       resources :todos do
+  #         resources :comments, module: :todos
+  #       end
+  #       resources :comments, module: :todo_sets
+  #     end
+  #   end
+  # end
 
   resources :todo_sets do
     resources :comments, module: :todo_sets

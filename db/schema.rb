@@ -95,13 +95,11 @@ ActiveRecord::Schema.define(version: 2021_02_15_071115) do
     t.text "job_title"
     t.bigint "user_id", null: false
     t.bigint "company_id"
-    t.bigint "project_id"
     t.bigint "account_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_people_on_account_id"
     t.index ["company_id"], name: "index_people_on_company_id"
-    t.index ["project_id"], name: "index_people_on_project_id"
     t.index ["user_id"], name: "index_people_on_user_id"
   end
 
@@ -115,12 +113,12 @@ ActiveRecord::Schema.define(version: 2021_02_15_071115) do
   end
 
   create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "account_id", null: false
     t.string "name"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_projects_on_user_id"
+    t.index ["account_id"], name: "index_projects_on_account_id"
   end
 
   create_table "t1s", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -197,11 +195,10 @@ ActiveRecord::Schema.define(version: 2021_02_15_071115) do
   add_foreign_key "companies", "users"
   add_foreign_key "people", "accounts"
   add_foreign_key "people", "companies"
-  add_foreign_key "people", "projects"
   add_foreign_key "people", "users"
   add_foreign_key "people_projects", "people"
   add_foreign_key "people_projects", "projects"
-  add_foreign_key "projects", "users"
+  add_foreign_key "projects", "accounts"
   add_foreign_key "todo_sets", "projects"
   add_foreign_key "todo_sets", "todo_sets", column: "parent_id"
   add_foreign_key "todo_sets", "users", column: "creator_id"

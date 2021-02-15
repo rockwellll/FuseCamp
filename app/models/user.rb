@@ -2,8 +2,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :projects
-  has_many :todo_sets, through: :projects
+  has_many :todo_sets
   has_one :account
 
   after_create_commit :create_account
