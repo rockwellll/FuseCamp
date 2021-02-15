@@ -1,6 +1,6 @@
 class Project < ApplicationRecord
-  acts_as_tenant :user
-  belongs_to :user
+  acts_as_tenant :account
+  belongs_to :account
   has_one :trash, dependent: :destroy
 
   has_and_belongs_to_many :people
