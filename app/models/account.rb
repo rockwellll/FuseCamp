@@ -1,8 +1,8 @@
 class Account < ApplicationRecord
   belongs_to :user
-  has_many :companies
-  has_many :people
-  has_many :projects
+  has_many :companies, dependent: :delete_all
+  has_many :people, dependent: :delete_all
+  has_many :projects, dependent: :delete_all
 
-  delegate :email, to: :user
+  delegate :email, :name, to: :user
 end
