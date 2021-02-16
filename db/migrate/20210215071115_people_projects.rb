@@ -5,5 +5,6 @@ class PeopleProjects < ActiveRecord::Migration[6.1]
       t.belongs_to :project, null: true, foreign_key: true
       t.timestamps
     end
+    add_index :people_projects, %i[person_id project_id], unique: true
   end
 end

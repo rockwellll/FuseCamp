@@ -7,5 +7,7 @@ class CreateBoosts < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+
+    add_index :boosts, %i[user_id boostable_id boostable_type], unique: true
   end
 end
