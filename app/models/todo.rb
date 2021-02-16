@@ -12,6 +12,8 @@ class Todo < ApplicationRecord
 
   delegate :project, to: :todo_set
 
+  delegate :email, :name, to: :creator, prefix: true
+
   def status_completed?
     status
   end
