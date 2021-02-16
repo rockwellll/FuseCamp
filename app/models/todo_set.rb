@@ -14,6 +14,8 @@ class TodoSet < ApplicationRecord
 
   before_destroy :destroy_all_todos
 
+  delegate :email, :name, to: :creator, prefix: true
+
   def completed_todos
     todos.where(status: true).count
   end

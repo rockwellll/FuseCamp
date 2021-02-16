@@ -6,4 +6,6 @@ class Comment < ApplicationRecord
   has_rich_text :content
 
   validates :content, presence: true
+
+  delegate :name, :email, to: :creator, prefix: true
 end

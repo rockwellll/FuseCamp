@@ -10,6 +10,8 @@ class Project < ApplicationRecord
   validates :name, presence: true
   after_create_commit :link_trash
 
+  delegate :email, :name, to: :account, prefix: true
+
   def put_in_trash(entity)
     trash.items.create! trashable: entity
   end

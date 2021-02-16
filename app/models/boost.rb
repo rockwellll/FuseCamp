@@ -3,4 +3,7 @@ class Boost < ApplicationRecord
   belongs_to :boostable, polymorphic: true
 
   validates :message, length: { maximum: 16 }, presence: true
+
+  delegate :email, to: :creator
+  delegate :name, to: :creator
 end
