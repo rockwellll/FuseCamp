@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_15_071115) do
+ActiveRecord::Schema.define(version: 2021_02_16_054908) do
 
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -48,6 +48,16 @@ ActiveRecord::Schema.define(version: 2021_02_15_071115) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "administrators", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "person_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id", "person_id"], name: "index_administrators_on_account_id_and_person_id", unique: true
+    t.index ["account_id"], name: "index_administrators_on_account_id"
+    t.index ["person_id"], name: "index_administrators_on_person_id"
   end
 
   create_table "boosts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -108,6 +118,7 @@ ActiveRecord::Schema.define(version: 2021_02_15_071115) do
     t.bigint "project_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id", "project_id"], name: "index_people_projects_on_person_id_and_project_id", unique: true
     t.index ["person_id"], name: "index_people_projects_on_person_id"
     t.index ["project_id"], name: "index_people_projects_on_project_id"
   end
@@ -189,6 +200,8 @@ ActiveRecord::Schema.define(version: 2021_02_15_071115) do
 
   add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "administrators", "accounts"
+  add_foreign_key "administrators", "people"
   add_foreign_key "boosts", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "companies", "accounts"
