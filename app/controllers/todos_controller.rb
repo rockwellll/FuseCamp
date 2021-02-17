@@ -11,10 +11,10 @@ class TodosController < ApplicationController
     respond_to do |format|
       if @todo.save
         format.turbo_stream
-        format.html { redirect_to user_project_todo_sets_path(user_id: current_user, project_id: @todo_set.project.id), notice: "Success" }
+        format.html { redirect_to user_project_todo_sets_path(user_id: current_user, project_id: @todo_set.project.id), notice: 'Success' }
       else
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(@todo, partial: "todos/form", locals: {todo: @todo, todo_set: @todo_set})
+          render turbo_stream: turbo_stream.replace(@todo, partial: 'todos/form', locals: {todo: @todo, todo_set: @todo_set})
         end
       end
     end
@@ -29,28 +29,31 @@ class TodosController < ApplicationController
   end
 
   def update
+    old_status = @todo.status
     respond_to do |format|
+
       @todo.update(todo_params)
       format.turbo_stream do
-        # TODO render back the result page when an item is being updated
         @project = @todo_set.project
+        return render 'todos/toggle' if old_status != @todo.status
 
-        return render 'todos/toggle'
+        render turbo_stream: turbo_stream.replace(@todo, partial: 'todos/todo', locals: {todo: @todo})
       end
+
       format.html do
-        redirect_to user_project_todo_sets_path(user_id: current_user, project_id: @todo_set.project.id), notice: "Success"
+        redirect_to user_project_todo_sets_path(user_id: current_user, project_id: @todo_set.project.id), notice: 'Success'
       end
     end
   end
-  
+
   def destroy
     @todo.put_in_project_trash
 
     respond_to do |format|
       format.turbo_stream do
-        render "todos/remove"
+        render 'todos/remove'
       end
-      format.html { redirect_to user_project_todoSets_path(user_id: current_user, project_id: @todo_set.project.id), notice: "Success" }
+      format.html { redirect_to user_project_todoSets_path(user_id: current_user, project_id: @todo_set.project.id), notice: 'Success' }
     end
   end
 
