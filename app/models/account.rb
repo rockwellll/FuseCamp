@@ -1,4 +1,6 @@
 class Account < ApplicationRecord
+  include Account::Administrered
+
   belongs_to :user
   has_many :companies, dependent: :delete_all
   has_many :people, dependent: :delete_all
