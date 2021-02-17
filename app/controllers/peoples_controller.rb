@@ -15,7 +15,8 @@ class PeoplesController < ApplicationController
       if @person.save
         format.html {  redirect_to account_peoples_path account_id: @account, notice: "New person added successfully"}
       else
-        format.html { render :new }
+        @user = @person.user
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -31,6 +32,6 @@ class PeoplesController < ApplicationController
   end
 
   def person_params
-    params.require(:person).permit(:job_title, user_attributes: [:name, :email, :password, :is_member])
+    params.require(:person).permit(:job_title, user_attributes: %i[name email password is_member])
   end
 end
