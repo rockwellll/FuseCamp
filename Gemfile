@@ -54,3 +54,8 @@ gem 'hotwire-rails'
 gem 'sendgrid-rails'
 gem 'google_sign_in'
 gem 'cancancan'
+gem 'omniauth'
+gem 'rack-cors'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+gem "figaro"
