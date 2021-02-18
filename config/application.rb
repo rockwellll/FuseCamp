@@ -19,5 +19,14 @@ module Basecamp
     config.action_view.field_error_proc = Proc.new { |html_tag, instance|
       html_tag
     }
+
+    config.hosts << "lvh.me"
+
+    Rails.application.config.middleware.insert_before Warden::Manager, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :post, :patch, :put]
+      end
+    end
   end
 end
