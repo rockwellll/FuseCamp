@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   resources :t1s
   resources :projects
 
-  devise_for :users
+  devise_for :users, controllers: {
+      omniauth_callbacks: "users/callbacks"
+  }
+
   root "account#index"
 
   resources :accounts, path: '' do
