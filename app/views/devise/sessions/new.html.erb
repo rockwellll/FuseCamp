@@ -7,6 +7,15 @@
       <h1 class="text--darker font-medium text-2xl self-center">
         Login to Basecamp 3
       </h1>
+
+
+      <%= form_tag user_google_oauth2_omniauth_authorize_path, class: "w-full px-4", method: :post do %>
+        <button type="submit" class="rounded-md shadow w-full p-2 font-medium text--darker flex items-center justify-center">
+          <img width="28" height="28" class="action_button__img action_button__img--google" alt="Google" title="Google" src="https://launchpad-asset0.37signals.com/assets/icons/google-g-c2ca287890a85fbdf16f8d9bb2e7f7cc7f1d3cbf252102c1d92d49b7dd3f2664.svg">
+          Sign in with Google
+        </button>
+      <% end %>
+
       <%= form_for(resource, as: resource_name, url: user_session_path, html: {class: "p-4 w-full"}) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -15,7 +24,6 @@
 
           <div class="absolute w-full h-1 border-b border-gray-300 left-0 right-0" style="top: 50%; z-index: 1"></div>
         </div>
-
         <div class="field">
           <%= f.email_field :email, autocomplete: "email", class: "w-full rounded bg-white focus:outline-none focus:shadow-outline border border-gray-400 p-2 my-2", placeholder: "Your email" %>
         </div>
@@ -30,6 +38,4 @@
       <% end %>
     </div>
   </div>
-
-  <%= render 'devise/shared/links' %>
 </div>
