@@ -9,7 +9,7 @@ export default class extends Controller {
 
     connect() {
         this.hide();
-        super.disconnect();
+        super.connect();
     }
 
     hide() {
