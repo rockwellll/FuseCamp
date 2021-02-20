@@ -1,0 +1,14 @@
+= turbo_stream.append "comments", partial: "comments/comment", locals: {comment: @comment}
+
+= turbo_stream.replace "comments-count-container" do
+  div[
+    class="flex items-center justify-center w-3/12"
+  ]
+    h1[
+      id="comments-count"
+      class="bg--blue rounded-full h-10 w-10 text-center text-white text-2xl rounded-full"
+    ] = @commentable.comments.count
+
+    span class="mx-2 text--darker font-bold" Comments
+
+  hr class="bg-gray-400 w-9/12 ml-3" style="height: 0.5px"/

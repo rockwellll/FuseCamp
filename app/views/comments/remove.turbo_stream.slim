@@ -1,0 +1,4 @@
+= turbo_stream.remove dom_id @comment
+= turbo_stream.replace "comments-count" do
+  h1#comments-count.bg--blue.rounded-full.h-10.w-10.text-center.text-white.text-2xl.rounded-full
+    = @commentable.comments.count
