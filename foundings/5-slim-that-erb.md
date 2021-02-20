@@ -50,6 +50,19 @@ class="rounded-full bg-white flex items-center justify-center px-2 py-1 my-1 mx-
         path clip-rule="evenodd" d=("M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z") fill-rule="evenodd"
 ```
 
+```slim
+    =boost.message
+```
+the `=` operator indicates a expression to execute
+
+which is equivalent of 
+
+```erbruby
+  <%= boost.message %>	
+```
+
+in erb.
+
 As you can see the number of lines have significantly decreased, of course there is space indentation, because indentation matters in Slim, but overall i like the aesthetic of a slim file after using erb forever, it looks more natural and reads better because of absence of tags looks more cleaner.
 
 ## Summary
