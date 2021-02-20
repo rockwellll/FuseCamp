@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["boostable_type", "boostable_id"], name: "index_boosts_on_boostable_type_and_boostable_id"
-    t.index ["user_id", "boostable_id", "boostable_type"], name: "index_boosts_on_user_id_and_boostable_id_and_boostable_type", unique: true
+    t.index ["user_id", "boostable_id", "boostable_type"], name: "index_boosts_on_user_id_and_boostable_id_and_boostable_type"
     t.index ["user_id"], name: "index_boosts_on_user_id"
   end
 
