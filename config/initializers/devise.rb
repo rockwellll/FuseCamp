@@ -296,7 +296,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  config.omniauth :google_oauth2, ENV["google_ouath_client_id"], ENV["HEnsgWLQVOfpiK3WvcRk2Ec7"], {}
+  config.omniauth :google_oauth2, "272703248968-qgqmqhv33hag4cos89od7ruqbhp931qo.apps.googleusercontent.com", "HEnsgWLQVOfpiK3WvcRk2Ec7", {}
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

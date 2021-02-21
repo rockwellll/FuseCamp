@@ -17,6 +17,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
       user.is_member = false
       user.name = auth.info.name
+      user.remember_created_at = Time.now
     end
   end
 

@@ -12,6 +12,16 @@
 
 ActiveRecord::Schema.define(version: 2021_02_16_054908) do
 
+  create_table "account_administratorships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "person_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id", "person_id"], name: "index_account_administratorships_on_account_id_and_person_id", unique: true
+    t.index ["account_id"], name: "index_account_administratorships_on_account_id"
+    t.index ["person_id"], name: "index_account_administratorships_on_person_id"
+  end
+
   create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -48,16 +58,6 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "administratorships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "account_id", null: false
-    t.bigint "person_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_id", "person_id"], name: "index_administratorships_on_account_id_and_person_id", unique: true
-    t.index ["account_id"], name: "index_administratorships_on_account_id"
-    t.index ["person_id"], name: "index_administratorships_on_person_id"
   end
 
   create_table "boosts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -202,10 +202,10 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "account_administratorships", "accounts"
+  add_foreign_key "account_administratorships", "people"
   add_foreign_key "accounts", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "administratorships", "accounts"
-  add_foreign_key "administratorships", "people"
   add_foreign_key "boosts", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "companies", "accounts"

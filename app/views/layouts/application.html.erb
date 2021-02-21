@@ -58,7 +58,7 @@
             <%= image_tag current_user.image, class: 'w-10 h-10 rounded-full' %>
           </button>
         <% end %>
-        <%= link_to 'Adminland', accounts_show_path(user_id: current_user), class: 'text--gray font-italic' %>
+        <%= link_to 'Adminland', account_path(id: current_user.account), class: 'text--gray font-italic' %>
 
       </div>
     <% end %>
