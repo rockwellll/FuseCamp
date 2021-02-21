@@ -6,5 +6,5 @@ class Account < ApplicationRecord
   has_many :people, dependent: :delete_all
   has_many :projects, dependent: :delete_all
 
-  delegate :email, :name, to: :user
+  delegate :email, :name, :image, to: :user
 end
