@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'peoples/index'
-  get 'accounts/show'
   resources :t1s
   resources :projects
 
@@ -13,6 +11,7 @@ Rails.application.routes.draw do
   resources :accounts, path: '' do
     resources :peoples
     resources :companies
+    resources :administrators
 
     resources :projects do
       resources :todo_sets, path: 'todosets' do
@@ -24,18 +23,18 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, path: '' do
-    get '/account', to: 'accounts#show'
-
-    resources :projects do
-      resources :todo_sets, path: 'todosets' do
-        resources :todos do
-          resources :comments, module: :todos
-        end
-        resources :comments, module: :todo_sets
-      end
-    end
-  end
+  # resources :users, path: '' do
+  #   get '/account', to: 'accounts#show'
+  #
+  #   resources :projects do
+  #     resources :todo_sets, path: 'todosets' do
+  #       resources :todos do
+  #         resources :comments, module: :todos
+  #       end
+  #       resources :comments, module: :todo_sets
+  #     end
+  #   end
+  # end
 
   resources :todo_sets do
     resources :comments, module: :todo_sets
