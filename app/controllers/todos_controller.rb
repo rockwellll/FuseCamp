@@ -1,7 +1,7 @@
 class TodosController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_parent
-  before_action :set_todo, only: %i[update edit destroy]
+  before_action :set_parent, except: %i[show]
+  before_action :set_todo, only: %i[update edit destroy show]
 
   def create
     @todo = @todo_set.todos.new(todo_params) do |todo|
@@ -19,6 +19,8 @@ class TodosController < ApplicationController
       end
     end
   end
+
+  def show; end
 
   def new
     @todo = @todo_set.todos.new

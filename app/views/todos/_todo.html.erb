@@ -46,7 +46,9 @@
       <% end %>
 
 
-      <h1 class="ml-2 text--gray"><%= todo.name %> </h1>
+      <h1 class="ml-2 text--gray">
+        <%= link_to todo.name, user_project_todo_path(user_id: current_user, project_id: todo.project, id: todo), data: {'turbo-frame': '_top'} %>
+      </h1>
 
       <% unless todo.notes.empty? %>
         <%= link_to [current_user, todo.todo_set.project, todo.todo_set, todo], { title: '1- View the comments on this todo \n 2- Update todo \n 3-'} do %>
