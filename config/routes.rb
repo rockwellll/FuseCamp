@@ -23,18 +23,21 @@ Rails.application.routes.draw do
     end
   end
 
-  # resources :users, path: '' do
-  #   get '/account', to: 'accounts#show'
-  #
-  #   resources :projects do
-  #     resources :todo_sets, path: 'todosets' do
-  #       resources :todos do
-  #         resources :comments, module: :todos
-  #       end
-  #       resources :comments, module: :todo_sets
-  #     end
-  #   end
-  # end
+  resources :users, path: '' do
+    get '/account', to: 'accounts#show'
+
+    resources :projects do
+      resources :todos do
+        resources :comments, module: :todos
+      end
+      resources :todo_sets, path: 'todosets' do
+        resources :todos do
+          resources :comments, module: :todos
+        end
+        resources :comments, module: :todo_sets
+      end
+    end
+  end
 
   resources :todo_sets do
     resources :comments, module: :todo_sets
@@ -42,6 +45,10 @@ Rails.application.routes.draw do
 
     resources :todo_groups, path: "groups", only: %i[create]
     delete '/promote', to: 'todo_groups#destroy'
+  end
+
+  resources :todos do
+    resources :comments, module: :todos
   end
 
   resources :comments do

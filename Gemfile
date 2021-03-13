@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.5'
+ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1', '>= 6.0.3.3'
-# Use mysql2 as the database for Active Record
-gem 'mysql2', '>= 0.4.4'
+# Use pg as the database for Active Record
+gem 'pg', '>= 0.4.4'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets
@@ -58,5 +58,4 @@ gem 'omniauth'
 gem 'rack-cors'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
-gem "figaro"
 gem 'slim'

@@ -1,64 +1,67 @@
 <%= turbo_frame_tag dom_id(todo) do %>
-  <article
-    data-controller="todo"
-    data-todo-id-value="<%= todo.id %>"
-    class="w-full flex items-center justify-start my-1 todo__container relative">
+  <%= link_to todo_set_todo_path(todo_set_id: todo.todo_set, id: todo) do %>
+    <article
+      data-controller="todo"
+      data-todo-id-value="<%= todo.id %>"
+      class="w-full flex items-center justify-start my-1 todo__container relative">
 
-    <aside data-todo-target="menu" id="side-menu" class="absolute border my-1 p-2 mr-3 rounded-md shadow hidden bg-white"
-           style="height: 200px; left: -150px; width: 115px; top: -10px; z-index: 40">
+      <aside data-todo-target="menu" id="side-menu" class="absolute border my-1 p-2 mr-3 rounded-md shadow hidden bg-white"
+             style="height: 200px; left: -150px; width: 115px; top: -10px; z-index: 40">
 
-      <div class="w-5 h-5 border transform rotate-45 absolute bg-white border-b-0 border-l-0" style="right: -9px;">
+        <div class="w-5 h-5 border transform rotate-45 absolute bg-white border-b-0 border-l-0" style="right: -9px;">
 
-      </div>
+        </div>
 
-      <ul class="text-sm text--gray">
-        <li class="todo__aside__menu__button px-1 outline-none w-full relative z-50">
-          <%= link_to "Edit", edit_todo_set_todo_path(todo.todo_set, todo), class: "" %>
-        </li>
-        <li>Move</li>
-        <li>Copy</li>
-        <hr class="bg-body my-2"/>
-        <li>Archive</li>
-        <li>
-          <%= form_tag [todo.todo_set, todo] do |f| %>s
-            <input type="hidden" name="_method" value="delete">
-            <button type="submit">
-              Delete
+        <ul class="text-sm text--gray">
+          <li class="todo__aside__menu__button px-1 outline-none w-full relative z-50">
+            <%= link_to "Edit", edit_todo_set_todo_path(todo.todo_set, todo), class: "" %>
+          </li>
+          <li>Move</li>
+          <li>Copy</li>
+          <hr class="bg-body my-2"/>
+          <li>Archive</li>
+          <li>
+            <%= form_tag [todo.todo_set, todo] do |f| %>s
+              <input type="hidden" name="_method" value="delete">
+              <button type="submit">
+                Delete
+              </button>
+            <% end %>
+            <%#= link_to "Delete" ,user_project_todo_list_todo_path(current_user, todo.todo_set.project, todo.todo_set, todo), class: "", method: :delete %>
+          </li>
+          <!--        TODO: SHOULD be trashed-->
+          <hr class="bg-body my-2"/>
+          <li class="w-full">
+            <button data-action="click->todos#showForm" class="todo__aside__menu__button px-1 focus:outline-none">Insert
+              a
+              todo
             </button>
-          <% end %>
-          <%#= link_to "Delete" ,user_project_todo_list_todo_path(current_user, todo.todo_set.project, todo.todo_set, todo), class: "", method: :delete %>
-        </li>
-        <!--        TODO: SHOULD be trashed-->
-        <hr class="bg-body my-2"/>
-        <li class="w-full">
-          <button data-action="click->todos#showForm" class="todo__aside__menu__button px-1 focus:outline-none">Insert a
-            todo
-          </button>
-        </li>
-      </ul>
-    </aside>
+          </li>
+        </ul>
+      </aside>
 
 
-    <main class="w-full flex todo__container items-center">
-      <%= form_for [ todo.todo_set, todo], method: :put, class: "flex" do |f| %>
-        <%= f.text_field :status, value: !todo.status, class: 'hidden' %>
-        <button class="w-5 h-5 rounded border border-gray-400 flex justify-center items-center focus:outline-none" aria-label="toggle update status"></button>
-      <% end %>
-
-
-      <h1 class="ml-2 text--gray">
-        <%= link_to todo.name, user_project_todo_path(user_id: current_user, project_id: todo.project, id: todo), data: {'turbo-frame': '_top'} %>
-      </h1>
-
-      <% unless todo.notes.empty? %>
-        <%= link_to [current_user, todo.todo_set.project, todo.todo_set, todo], { title: '1- View the comments on this todo \n 2- Update todo \n 3-'} do %>
-          <svg class="w-4 h-4 text--gray" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z" clip-rule="evenodd"></path>
-          </svg>
+      <main class="w-full flex todo__container items-center">
+        <%= form_for [todo.todo_set, todo], method: :put, class: "flex" do |f| %>
+          <%= f.text_field :status, value: !todo.status, class: 'hidden' %>
+          <button class="w-5 h-5 rounded border border-gray-400 flex justify-center items-center focus:outline-none" aria-label="toggle update status"></button>
         <% end %>
-      <% end %>
 
-      <span data-action="click->todo#showMenu" class="cursor-pointer">  <small class="text__light" id="schedule">Assign/Schedule</small></span>
-    </main>
-  </article>
+
+        <h1 class="ml-2 text--gray">
+          <%= link_to todo.name, user_project_todo_path(user_id: current_user, project_id: todo.project, id: todo), data: {'turbo-frame': '_top'} %>
+        </h1>
+
+        <% unless todo.notes.empty? %>
+          <%= link_to [current_user, todo.todo_set.project, todo.todo_set, todo], {title: '1- View the comments on this todo \n 2- Update todo \n 3-'} do %>
+            <svg class="w-4 h-4 text--gray" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z" clip-rule="evenodd"></path>
+            </svg>
+          <% end %>
+        <% end %>
+
+        <span data-action="click->todo#showMenu" class="cursor-pointer">  <small class="text__light" id="schedule">Assign/Schedule</small></span>
+      </main>
+    </article>
+  <% end %>
 <% end %>

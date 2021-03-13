@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2021_02_16_054908) do
 
-  create_table "account_administratorships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "account_administratorships", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.bigint "person_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -22,16 +25,16 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["person_id"], name: "index_account_administratorships_on_person_id"
   end
 
-  create_table "accounts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "accounts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
-  create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
-    t.text "body", size: :long
+    t.text "body"
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -39,7 +42,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
-  create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -49,7 +52,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "active_storage_blobs", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -60,7 +63,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "boosts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "boosts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "boostable_type", null: false
     t.bigint "boostable_id", null: false
@@ -72,7 +75,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["user_id"], name: "index_boosts_on_user_id"
   end
 
-  create_table "colors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "colors", force: :cascade do |t|
     t.string "hex", null: false
     t.string "colorable_type", null: false
     t.bigint "colorable_id", null: false
@@ -81,7 +84,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["colorable_type", "colorable_id"], name: "index_colors_on_colorable_type_and_colorable_id"
   end
 
-  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "comments", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "commentable_type"
     t.bigint "commentable_id"
@@ -92,7 +95,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "companies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "companies", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id", null: false
     t.bigint "account_id", null: false
@@ -102,7 +105,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
-  create_table "people", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "people", force: :cascade do |t|
     t.text "job_title"
     t.bigint "user_id", null: false
     t.bigint "company_id"
@@ -114,7 +117,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["user_id"], name: "index_people_on_user_id"
   end
 
-  create_table "people_projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "people_projects", force: :cascade do |t|
     t.bigint "person_id", null: false
     t.bigint "project_id"
     t.datetime "created_at", precision: 6, null: false
@@ -124,7 +127,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["project_id"], name: "index_people_projects_on_project_id"
   end
 
-  create_table "projects", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "projects", force: :cascade do |t|
     t.bigint "account_id", null: false
     t.string "name"
     t.text "description"
@@ -133,12 +136,12 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["account_id"], name: "index_projects_on_account_id"
   end
 
-  create_table "t1s", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "t1s", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "todo_sets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "todo_sets", force: :cascade do |t|
     t.bigint "creator_id", null: false
     t.bigint "project_id", null: false
     t.string "name"
@@ -152,7 +155,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["project_id"], name: "index_todo_sets_on_project_id"
   end
 
-  create_table "todos", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "todos", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "todo_set_id", null: false
     t.string "name", null: false
@@ -168,7 +171,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["user_id"], name: "index_todos_on_user_id"
   end
 
-  create_table "trash_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "trash_items", force: :cascade do |t|
     t.bigint "trash_id", null: false
     t.string "trashable_type"
     t.bigint "trashable_id"
@@ -178,14 +181,14 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.index ["trashable_type", "trashable_id"], name: "index_trash_items_on_trashable_type_and_trashable_id"
   end
 
-  create_table "trashes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "trashes", force: :cascade do |t|
     t.bigint "project_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["project_id"], name: "index_trashes_on_project_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
