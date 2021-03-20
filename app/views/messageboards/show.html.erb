@@ -1,0 +1,75 @@
+<div style="background: #FCFCFB" class="w-5/12 rounded flex justify-center shadow-md items-center p-3 pb-5">
+  <svg class="w-4 h-4 text-blue-700 mx-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path>
+  </svg>
+  <h1 class="text-blue-700 underline">
+    <%= link_to @project.name, [current_user, @project] %> >
+
+    <%= link_to "To-dos", user_project_todo_sets_path(user_id: current_user, project_id: @project) %>
+  </h1>
+</div>
+
+
+<section
+  data-controller="todos notification collapse"
+  data-notification-content-value="<%= notice %>"
+  style="margin-top: -20px"
+  class="bg-white p-2 w-6/12 min-h-screen shadow flex flex-col items-center">
+
+  <header class="flex justify-between items-end w-10/12 border-black border-b-4 pb-2">
+
+      <%= link_to new_account_project_message_board_message_path(current_user.account, @project, @message_board),
+                  class: "flex items-center px-3 text-xs text-white py-2 rounded-full bg--green focus:outline-none focus:shadow-outline self-end" do %>
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+        </svg>
+        New Message
+      <% end %>
+
+
+
+    <h1 class="text-3xl font-bold text--darker  ">
+      Message Board
+    </h1>
+
+    <div class="flex relative" data-controller="todo-list-display">
+      <button
+        data-action="click->todo-list-display#toggleContainerVisibility"
+        class="rounded-full border px-3 py-2 text-xs todo-list__display-settings flex items-center focus:shadow-outline focus:outline-none">
+        All messages
+      </button>
+
+      <div
+        data-todo-list-display-target="settingsContainer"
+        class="absolute bg-white rounded-md shadow py-2 text--gray hidden" style="width: 250px; top: 40px">
+
+        <button class="mt-2 p-1 w-full hover:bg-blue-100 text-center font-medium focus:outline-none">
+         All messages
+        </button>
+
+        <button class="mt-2 p-1 w-full hover:bg-blue-100 text-center focus:outline-none">
+          View to-dos as cards
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+  <main class="w-full md:w-9/12">
+    <% @messages.each do |message| %>
+      <article class="flex justify-start my-2 border-b border-gray-300 p-2">
+        <div class="w-12 h-12">
+          <%= image_tag message.user.image, class: 'w-12 h-12 rounded-full' %>
+        </div>
+
+        <aside class="mx-2">
+         <h1 class="text-xl">
+           <%= message.title %>
+         </h1>
+          <p class="text-base text--body__lighter"><%= message.body %></p>
+        </aside>
+      </article>
+
+    <% end %>
+  </main>
+</section>

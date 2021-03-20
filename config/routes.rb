@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'messages/new'
+  get 'messageboards/index'
   resources :t1s
   resources :projects
 
@@ -14,6 +16,10 @@ Rails.application.routes.draw do
     resources :administrators
 
     resources :projects do
+	    resources :message_boards, controller: 'messageboards', only: %i[show] do
+		    resources :messages
+      end
+
       resources :todo_sets, path: 'todosets' do
         resources :todos do
           resources :comments, module: :todos
@@ -53,6 +59,10 @@ Rails.application.routes.draw do
 
   resources :comments do
     resources :boosts, module: :comments
+  end
+
+  resources :message_boards, controller: 'messageboards', only: %i[show] do
+    resources :messages
   end
 
   resources :boosts, only: [:destroy]

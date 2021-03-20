@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_16_054908) do
+ActiveRecord::Schema.define(version: 2021_03_14_164900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,28 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_companies_on_account_id"
     t.index ["user_id"], name: "index_companies_on_user_id"
+  end
+
+  create_table "message_boards", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_message_boards_on_project_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "message_board_id", null: false
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.text "body"
+    t.string "status"
+    t.string "category"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category"], name: "index_messages_on_category"
+    t.index ["message_board_id"], name: "index_messages_on_message_board_id"
+    t.index ["status"], name: "index_messages_on_status"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "people", force: :cascade do |t|
@@ -213,6 +235,9 @@ ActiveRecord::Schema.define(version: 2021_02_16_054908) do
   add_foreign_key "comments", "users"
   add_foreign_key "companies", "accounts"
   add_foreign_key "companies", "users"
+  add_foreign_key "message_boards", "projects"
+  add_foreign_key "messages", "message_boards"
+  add_foreign_key "messages", "users"
   add_foreign_key "people", "accounts"
   add_foreign_key "people", "companies"
   add_foreign_key "people", "users"

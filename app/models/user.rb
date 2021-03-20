@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :todo_sets
   has_one :account, dependent: :destroy
 
+  has_many :messages
+
   after_create_commit :create_account
 
   def self.from_google_omniauth(auth)

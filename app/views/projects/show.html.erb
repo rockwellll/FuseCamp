@@ -25,7 +25,7 @@
     </header>
 
     <section class="w-full px-10 grid grid-cols-3 my-2">
-      <a href="">
+      <%= link_to account_project_message_board_path(account_id: current_user.account, project_id: @project, id: @project.message_board) do %>
         <article class="flex flex-col justify-center items-center rounded-md border p-2 py-4 mx-2">
           <header class="w-9/12 text-center font-medium text--darker">
             Message Board
@@ -46,8 +46,7 @@
             </p>
           </footer>
         </article>
-      </a>
-
+      <% end %>
       <%= link_to user_project_todo_sets_path(user_id: current_user, project_id: @project) do %>
 
         <article class="flex flex-col justify-center items-center rounded-md border p-2 py-4 mx-2">
