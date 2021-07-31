@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+require 'os'
+
+# path to your application root.
+APP_ROOT = File.expand_path('..', __dir__)
+
+def log(message)
+  puts "[ bin/setup ] #{message}"
+end
+
+def run
+  system! 'bin/rails s'
+end
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+def help
+  log 'Useful commands:'
+
+  log 'options'
+  log ' bin/run'
+  log ' # run app locally'
+  log ''
+
+  log 'bin/run --mailer: runs the mailcatcher server, used for sending emails'
+end
+
+def run_mailer
+  if OS.windows?
+    system! 'mailcatcher'
+  else
+    system! './bin/mailcatcher'
+  end
+end
+
+if ARGV[0] == 'help'
+  help
+elsif ARGV[0] == '--mailer'
+  run_mailer
+else
+  run
+end

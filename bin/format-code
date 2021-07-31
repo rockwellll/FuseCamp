@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+def log(message)
+  puts "[ bin/setup ] #{message}"
+end
+
+def run
+  log 'running prettier to reformat javascript code'
+  system! 'npx prettier --write app/javascript'
+end
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+def help
+  log 'Useful commands:'
+
+  log 'options'
+  log ' bin/run'
+  log ' # run app locally'
+  log ''
+
+  log 'bin/run --mailer: runs the mailcatcher server, used for sending emails'
+end
+
+if ARGV[0] == 'help'
+  help
+elsif ARGV[0] == '--mailer'
+  run_mailer
+else
+  run
+end

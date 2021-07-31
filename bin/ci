@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+
+# resetting and seeding the database
+echo "[ bin/ci ] migrating the test database"
+bin/rails db:migrate:reset RAILS_ENV=test
+
+echo "[ bin/ci ] Running rspec tests"
+bin/bundle exec rspec spec

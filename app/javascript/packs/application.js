@@ -26,3 +26,4 @@ Turbo.start();
 document.addEventListener('turbo:load', function () {
     console.log('dddd')
 })
+import "stylesheets/application"

@@ -1,0 +1,294 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import 'trix/dist/trix.css';
+
+
+.bg-body {
+  background-color: #F6F2EF;
+}
+
+.bg-body__light {
+  background-color: #FAF8F7;
+}
+
+.bg--green {
+  background-color: #2DA562;
+}
+
+.text--green {
+  color: #2DA562;
+}
+
+.button__green {
+  @apply bg--green text-white;
+}
+
+.button__green:focus {
+  background-color: #227D4A;
+}
+
+.text--gray {
+  color: #3E4F58;
+}
+
+.text--darker {
+  color: #283C46;
+}
+
+.bg--blue {
+  background-color: #1B6AC9;
+}
+
+.side-nav {
+  opacity: 0;
+  right: -100px;
+  tab-index: 0;
+  z-index: -100;
+}
+
+.side-nav--animate--in {
+  animation: slide-in 400ms ease-in 0s 1 normal forwards;
+}
+
+.aside__button:hover {
+  background-color: #144F97;
+}
+
+.aside__button {
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.aside__button.u-have__border {
+  border-color: #185FB5;
+  @apply border-b;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    right: -100px;
+    tab-index: 0;
+    z-index: -100;
+  }
+  to {
+    opacity: 1;
+    right: 0;
+    tab-index: 1;
+    z-index: 100;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    opacity: 1;
+    right: 0;
+    tab-index: 1;
+    z-index: 100;
+  }
+  to {
+    opacity: 0;
+    right: -100px;
+    tab-index: 0;
+    z-index: -100;
+  }
+}
+
+.bg--blue--light {
+  background-color: #28B1CC;
+}
+
+.border--green {
+  border-color: #2DA562;
+}
+
+trix-toolbar {
+  @apply w-full text-sm;
+}
+
+trix-editor {
+  @apply w-full rounded-md border;
+  height: 200px;
+
+}
+
+.link {
+  color: #1B6AC9;
+}
+
+.text--placeholder {
+  color: #BDBDBD;
+}
+
+.text__light {
+  color: #877457;
+}
+
+.todo__container > span {
+  display: none;
+}
+
+.todo__container:hover > span {
+  display: inline;
+}
+
+.todo__aside__menu:after {
+  @apply border absolute top-0 transform rotate-45;
+  width: 50px;
+  height: 50px;
+  right: -10px;
+  content: '';
+}
+
+.todo__aside__menu__button:hover {
+  background-color: #ECF9FD;
+}
+
+
+.bg--black--light {
+  background: #404040;
+}
+//.notification__pop__in {
+//    visibility: hidden;
+//    transform: scale(0.1);
+//    animation: pop-in 1s ease-in-out 0s 1 normal both;
+//}
+//
+//.notification__pop__out {
+//    animation: pop-out 600ms ease-in 0s 1 normal forwards;
+//}
+
+@keyframes pop-in {
+  from {
+    visibility: hidden;
+  }
+
+  to {
+    display: block;
+    visibility: visible;
+    transform: scale(1);
+  }
+}
+
+@keyframes pop-out {
+  from {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(0);
+  }
+}
+
+.custom-radio__button {
+  border-color: #283C46;
+}
+
+.border--body {
+  border-color: #DADADA;
+}
+
+.prompt {
+  color: #a9a9a9;
+}
+
+.trix-hidden__block-tools  .trix-button-group--block-tools {
+  @apply hidden;
+}
+
+.trix-hidden__block-tools trix-editor {
+  border: none;
+}
+
+.text--body__lighter {
+  color: #BCBBBA;
+}
+
+.expanded .action-sheet__content {
+  visibility: visible;
+  @apply block w-4/12;
+  height: auto;
+}
+
+
+.action-sheet__content {
+  transition: all .2s;
+  visibility: hidden;
+  @apply absolute text-left w-0;
+  overflow-wrap: break-word;
+}
+
+.expanded__boost .new__boost {
+  visibility: visible;
+  @apply block;
+  height: auto;
+  transform: scale(1);
+}
+
+.expanded__boost .toggle__boost {
+  visibility: hidden;
+  @apply hidden;
+  transform: scale(0);
+}
+
+.toggle__boost {
+  visibility: visible;
+  transition: 0.2s all;
+  transform: scale(1);
+}
+
+.new__boost {
+  transition: all .2s;
+  visibility: hidden;
+  overflow-wrap: break-word;
+  transform: scale(0);
+}
+
+.show__notification .notification {
+  visibility: visible;
+  @apply block;
+  transform: scale(1);
+}
+
+.notification {
+  transition: all .2s;
+  visibility: hidden;
+  transform: scale(0);
+}
+
+.color-picker__field {
+  @apply inline-block h-auto;
+  margin: 0 5px 0 0;
+}
+
+.color_picker {
+  width: 20px;
+  height: 20px;
+  @apply rounded-full inline-block border border-transparent;
+}
+
+.color_picker__checked:checked ~ .color_picker {
+  @apply border-black;
+}
+
+
+.color__blue {
+  color: #1B6AC9;
+}
+
+.bg__orange {
+  background-color: #FFA235;
+}
+
+.color__orange {
+  color: #FFA235;
+}
+
+.required {
+  font-size: 0.52rem
+}

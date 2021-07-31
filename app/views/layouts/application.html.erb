@@ -10,6 +10,7 @@
   <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 
   <meta name="no-preview">
+    <%= stylesheet_pack_tag "application", "data-turbo-track": "reload" %>
 </head>
 
 <body class="bg-body h-screen relative">
@@ -121,6 +122,6 @@
   <%= yield %>
 </div>
 
-<%= debug params %>
+<%#= debug params %>
 </body>
 </html>
