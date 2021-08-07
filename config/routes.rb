@@ -65,6 +65,10 @@ Rails.application.routes.draw do
     resources :messages
   end
 
+  resources :messages do
+    resources :comments, module: :messages
+  end
+
   resources :boosts, only: [:destroy]
   resources :comments, only: %i[destroy update]
   # resources :projects, only: %i[index create new show]

@@ -1,4 +1,6 @@
 class Message < ApplicationRecord
+  include Commentable
+
   belongs_to :message_board
   belongs_to :user
 
